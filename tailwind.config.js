@@ -6,7 +6,18 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: {
+          500: "#FF6363;",
+          800: "#FF1313;",
+        },
+      },
+      fontFamily: {
+        Poppins: ["Poppins"],
+        Rajdhani: ["Rajdhani"],
+      },
+    },
   },
   plugins: [],
 };

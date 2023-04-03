@@ -2,6 +2,99 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Poppins */
+@font-face {
+  font-family: "Poppins";
+  src: url("../asset/Poppins/Poppins-ExtraLight.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../asset/Poppins/Poppins-Light.ttf");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../asset/Poppins/Poppins-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../asset/Poppins/Poppins-Medium.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../asset/Poppins/Poppins-SemiBold.ttf");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../asset/Poppins/Poppins-ExtraBold.ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../asset/Poppins/Poppins-ExtraBold.ttf");
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../asset/Poppins/Poppins-ExtraBold.ttf");
+  font-weight: 900;
+  font-style: normal;
+}
+/* Rajdhani */
+@font-face {
+  font-family: "Rajdhani";
+  src: url("../asset/rajdhani/Rajdhani-Light.ttf");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Rajdhani";
+  src: url("../asset/rajdhani/Rajdhani-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Rajdhani";
+  src: url("../asset/rajdhani/Rajdhani-Medium.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Rajdhani";
+  src: url("../asset/rajdhani/Rajdhani-SemiBold.ttf");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Rajdhani";
+  src: url("../asset/rajdhani/Rajdhani-Bold.ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Rajdhani";
+  src: url("../asset/rajdhani/Rajdhani-Bold.ttf");
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Rajdhani";
+  src: url("../asset/rajdhani/Rajdhani-Bold.ttf");
+  font-weight: 900;
+  font-style: normal;
+}
+
 html,
 body {
   margin: 0;
