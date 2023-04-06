@@ -111,6 +111,32 @@ body {
   border-right-width: 0.5px;
 }
 
+.banner {
+  background-image: url("/banner.png");
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.win {
+  background-image: url("/win.png");
+  height: 140px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  top: 32%;
+}
+
+.banner-text {
+  top: 19%;
+}
+
+.wavy {
+  /* box-shadow: 1px 1px 10px 12px #bd2344;
+  opacity: 0.3; */
+}
+
 @media screen and (min-width: 480px) {
   html,
   body {
