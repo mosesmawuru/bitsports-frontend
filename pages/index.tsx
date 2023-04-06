@@ -1,7 +1,12 @@
+import { Header } from "@/components";
+import { MenuBars, OfficialLogo } from "@/public/icons";
+import PoolLogo from "@/public/pool-logo.png";
+import Image from "next/image";
+
 export default function Home() {
   return (
-    <>
-      <h1 className="text-3xl font-bold underline font-Poppins">Home</h1>
-    </>
+    <div className="w-full">
+      <Header />
+    </div>
   );
 }
