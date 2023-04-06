@@ -113,7 +113,7 @@ body {
 
 .banner {
   background-image: url("/banner.png");
-  height: 500px;
+  height: 381px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -125,11 +125,11 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  top: 32%;
+  top: 30%;
 }
 
 .banner-text {
-  top: 19%;
+  top: 13%;
 }
 
 .wavy {

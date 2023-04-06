@@ -8,7 +8,7 @@ export default function Home() {
         <div className="banner w-full relative">
           <div className="win relative" />
           <div className="flex flex-col justify-center items-center relative banner-text">
-            <h2 className="text-white mb-3 font-bold text-6xl text-center font-Poppins">
+            <h2 className="text-white mb-4 font-bold xl:text-6xl lg:text-4xl text-center font-Poppins">
               WORLD FIRST PLAY-TO-EARN POOL GAME
             </h2>
             <Button isWavy px="px-4" text="Play Bit Pool Web" />
