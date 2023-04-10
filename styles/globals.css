@@ -141,6 +141,18 @@ body {
   transition: fill 0.3s ease;
 }
 
+.modal-container {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.modal {
+  background-image: url("/modal-bg.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 @media screen and (max-width: 480px) {
   html,
   body {
@@ -162,5 +174,10 @@ body {
 
   .hide {
     display: none;
+  }
+
+  .modal-container {
+    background: transparent;
+    backdrop-filter: blur(2px);
   }
 }

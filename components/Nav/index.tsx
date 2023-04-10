@@ -15,7 +15,7 @@ import Link from "next/link";
 const items = [
   {
     title: "QUEST",
-    icon: <Ball />,
+    icon: <Ball fill="#777786" />,
     url: "#",
   },
   {

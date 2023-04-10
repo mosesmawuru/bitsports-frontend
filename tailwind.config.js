@@ -21,6 +21,7 @@ module.exports = {
           600: "#374151",
           650: "#9CA3AF",
           700: "#777786",
+          750: "#C6C6C6",
         },
         secondary: {
           50: "#BD2344",
@@ -32,6 +33,17 @@ module.exports = {
       fontFamily: {
         Poppins: ["Poppins"],
         Rajdhani: ["Rajdhani"],
+      },
+      width: {
+        modal: "470px",
+      },
+      minHeight: {
+        "90vh": "90vh",
+        "60vh": "60vh",
+      },
+      maxHeight: {
+        "90vh": "90vh",
+        modal: "75vh",
       },
     },
   },

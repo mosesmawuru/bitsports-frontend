@@ -8,6 +8,7 @@ export enum variantTypes {
   primary = "primary",
   secondary = "secondary",
   outline = "outline",
+  full = "full",
 }
 
 export enum volumeTypes {
@@ -25,7 +26,7 @@ interface IPNSButton {
   px?: string;
   py?: string;
   textVol?: volumeTypes;
-  isWavy?: boolean;
+  isFull?: boolean;
 }
 const Button = ({
   text,
@@ -35,7 +36,7 @@ const Button = ({
   disabled,
   px = "px-6",
   textVol = volumeTypes.md,
-  isWavy,
+  isFull,
   py = "py-2.5",
 }: IPNSButton) => {
   return (
@@ -44,7 +45,7 @@ const Button = ({
         disabled={disabled}
         type={type}
         className={`flex rounded justify-center hover:opacity-70 duration-500 items-center ${
-          isWavy && "wavy"
+          isFull && "w-full"
         } ${px} ${py} ${textVol === "sm" && "h-10 rounded-sm py-0"} ${
           variant === "primary"
             ? "bg-secondary-50 border-secondary-50"
@@ -52,6 +53,8 @@ const Button = ({
             ? "bg-secondary-150 border-secondary-150"
             : variant === "outline"
             ? "bg-black border border-secondary-50"
+            : variant === "full"
+            ? "bg-secondary-100 border-secondary-100"
             : ""
         }`}
         onClick={onClick}
