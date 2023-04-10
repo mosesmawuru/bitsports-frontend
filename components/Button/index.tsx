@@ -23,6 +23,7 @@ interface IPNSButton {
   onClick?: () => void;
   disabled?: boolean;
   px?: string;
+  py?: string;
   textVol?: volumeTypes;
   isWavy?: boolean;
 }
@@ -35,15 +36,16 @@ const Button = ({
   px = "px-6",
   textVol = volumeTypes.md,
   isWavy,
+  py = "py-2.5",
 }: IPNSButton) => {
   return (
     <>
       <button
         disabled={disabled}
         type={type}
-        className={`flex rounded justify-center hover:opacity-70 duration-500 items-center py-2.5 ${
+        className={`flex rounded justify-center hover:opacity-70 duration-500 items-center ${
           isWavy && "wavy"
-        } ${px} ${
+        } ${px} ${py} ${textVol === "sm" && "h-10 rounded-sm py-0"} ${
           variant === "primary"
             ? "bg-secondary-50 border-secondary-50"
             : variant === "secondary"
@@ -57,9 +59,9 @@ const Button = ({
         <div
           className={`text-white font-semibold ${
             textVol === "sm"
-              ? "text-sm"
+              ? "xl:text-xl text-xs font-bold"
               : textVol === "md"
-              ? "lg:text-lg text-base"
+              ? "lg:text-lg text-sm"
               : "text-3xl"
           }`}
         >

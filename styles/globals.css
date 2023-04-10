@@ -128,6 +128,10 @@ body {
   top: 30%;
 }
 
+.item {
+  width: 66%;
+}
+
 .banner-text {
   top: 13%;
 }
@@ -137,9 +141,26 @@ body {
   opacity: 0.3; */
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (max-width: 480px) {
   html,
   body {
     background-color: #232323;
+  }
+
+  .win {
+    display: none;
+  }
+
+  .banner {
+    background-image: url("/Hotpot.png");
+    height: 168px;
+  }
+
+  .item {
+    width: 100%;
+  }
+
+  .hide {
+    display: none;
   }
 }
