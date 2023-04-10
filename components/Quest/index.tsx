@@ -33,7 +33,7 @@ const quests = [
 const QuestComponent = (prop: IProp) => {
   return (
     <div
-      className="bg-primary-400 px-5 py-3 flex justify-between"
+      className="bg-primary-400 lg:h-20 h-14 px-5 items-center flex justify-between"
       key={prop.index}
     >
       <div className="h-11 w-11 rounded-full bg-white flex justify-center items-center">
@@ -45,7 +45,7 @@ const QuestComponent = (prop: IProp) => {
       <Button
         variant={variantTypes.secondary}
         textVol={volumeTypes.sm}
-        px="xl:px-16 px-5"
+        px="xl:px-20 px-5"
         text="ACCEPT"
       />
       <div className="cursor-pointer xl:hidden self-center">

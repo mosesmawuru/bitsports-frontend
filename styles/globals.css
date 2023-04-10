@@ -136,6 +136,11 @@ body {
   top: 13%;
 }
 
+.nav-link:hover .nav-item {
+  fill: #ffffff;
+  transition: fill 0.3s ease;
+}
+
 @media screen and (max-width: 480px) {
   html,
   body {

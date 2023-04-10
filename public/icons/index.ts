@@ -11,6 +11,7 @@ import Leaderboard from "./leaderboard";
 import News from "./news";
 import Nft from "./nft";
 import Tutorial from "./tutorial";
+import Contact from "./contact";
 
 export {
   MenuBars,
@@ -26,4 +27,5 @@ export {
   News,
   Nft,
   Tutorial,
+  Contact,
 };

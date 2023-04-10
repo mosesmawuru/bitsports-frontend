@@ -29,9 +29,9 @@ export default function Home() {
           and other Crypto
         </p>
 
-        <div className="mt-5 xl:gap-14 flex w-full flex-col xl:flex-row  items-start justify-between">
+        <div className="mt-5 xl:gap-11 flex w-full flex-col xl:flex-row  items-start justify-between">
           <div className="flex w-full flex-col gap-2">
-            {[1, 2, 3, 4, 5].map((item, index) => (
+            {[1, 2, 3, 4].map((item, index) => (
               <QuestComponent key={index} index={index} />
             ))}
             <div className="hidden xl:block">
@@ -40,12 +40,11 @@ export default function Home() {
           </div>
           <Image
             priority={true}
-            height={400}
-            width={495}
+            width={465}
             src={Banner}
             alt="pool banner"
             className="hidden xl:block cursor-pointer"
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: "contain" }}
           />
         </div>
         <div className="xl:hidden">

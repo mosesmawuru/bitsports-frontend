@@ -1,7 +1,15 @@
 import Image from "next/image";
 
 import PoolLogo from "@/public/pool-logo.png";
-import { Ball, Dapp, Leaderboard, News, Nft, Tutorial } from "@/public/icons";
+import {
+  Ball,
+  Contact,
+  Dapp,
+  Leaderboard,
+  News,
+  Nft,
+  Tutorial,
+} from "@/public/icons";
 import Link from "next/link";
 
 const items = [
@@ -53,14 +61,16 @@ const DesktopNav = () => {
           <Link
             href={item.url}
             key={item.title}
-            className="flex gap-2 flex-col justify-center items-center"
+            className="flex gap-2 flex-col duration-300 justify-center text-primary-700 hover:text-white items-center nav-link"
           >
             {item.icon}
-            <p className="text-sm font-semibold text-center text-primary-700">
-              {item.title}
-            </p>
+            <p className="text-sm font-semibold text-center">{item.title}</p>
           </Link>
         ))}
+      </div>
+
+      <div className="mt-20">
+        <Contact />
       </div>
     </nav>
   );
