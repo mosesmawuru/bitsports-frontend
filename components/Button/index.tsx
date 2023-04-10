@@ -61,7 +61,7 @@ const Button = ({
             textVol === "sm"
               ? "xl:text-xl text-xs font-bold"
               : textVol === "md"
-              ? "lg:text-lg text-sm"
+              ? "xl:text-lg text-sm"
               : "text-3xl"
           }`}
         >
