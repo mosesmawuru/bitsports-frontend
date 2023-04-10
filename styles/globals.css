@@ -136,11 +136,6 @@ body {
   top: 13%;
 }
 
-.wavy {
-  /* box-shadow: 1px 1px 10px 12px #bd2344;
-  opacity: 0.3; */
-}
-
 @media screen and (max-width: 480px) {
   html,
   body {

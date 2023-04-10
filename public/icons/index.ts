@@ -5,6 +5,12 @@ import ArrowDown from "./arrowDown";
 import ArrowRight from "./ArrowRight";
 import ArrowLeft from "./ArrowLeft";
 import Lock from "./lock";
+import Ball from "./ball";
+import Dapp from "./dapp";
+import Leaderboard from "./leaderboard";
+import News from "./news";
+import Nft from "./nft";
+import Tutorial from "./tutorial";
 
 export {
   MenuBars,
@@ -14,4 +20,10 @@ export {
   ArrowRight,
   ArrowLeft,
   Lock,
+  Ball,
+  Dapp,
+  Leaderboard,
+  News,
+  Nft,
+  Tutorial,
 };

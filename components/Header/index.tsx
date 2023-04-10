@@ -6,7 +6,7 @@ import Button, { variantTypes } from "../Button";
 const Header = () => {
   return (
     <div className="bg-primary-200 small-border-b xl:border-b-primary-150 border-b-black">
-      <header className="hidden w-full xl:flex xl:items-center xl:justify-between container mx-auto py-8 ">
+      <header className="hidden w-full xl:flex xl:items-center xl:justify-between container mx-auto py-6">
         <div>
           <h1 className="text-3xl font-bold text-white">BITPOOL</h1>
           <div className="flex items-center justify-center gap-1">
