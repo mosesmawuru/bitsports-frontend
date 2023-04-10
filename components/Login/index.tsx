@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Input from "../Input";
 import { useState } from "react";
@@ -20,8 +19,6 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
-    watch,
   } = useForm<any>({
     mode: "onSubmit",
     resolver: yupResolver(schema),
@@ -35,7 +32,7 @@ const Login = () => {
   return (
     <div className="w-full">
       <p className="text-white text-2xl lg:text-3xl font-bold text-center">
-        Sign Up to your BitPool Account
+        Sign In to your BitPool Account
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="mt-10">

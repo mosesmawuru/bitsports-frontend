@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Input from "../Input";
 import { useState } from "react";
@@ -13,6 +12,9 @@ import Image from "next/image";
 const schema = yup.object().shape({
   email: yup.string().email("Email is Invalid").required("Email is required"),
   password: yup.string().required("Password is required"),
+  first_name: yup.string().required("First name is required"),
+  last_name: yup.string().required("Last name is required"),
+  user_name: yup.string().required("User name is required"),
 });
 
 const Signup = () => {
@@ -20,8 +22,6 @@ const Signup = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
-    watch,
   } = useForm<any>({
     mode: "onSubmit",
     resolver: yupResolver(schema),
@@ -34,11 +34,34 @@ const Signup = () => {
   };
   return (
     <div className="w-full">
-      <p className="lg:text-white text-xl lg:text-3xl font-bold text-center ">
+      <p className="text-white text-2xl lg:text-3xl font-bold text-center">
         Sign Up to your BitPool Account
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
+        <div className="flex flex-col lg:flex-row justify-between w-full gap-2">
+          <Input
+            name="first_name"
+            label="FIRST NAME"
+            register={register("first_name")}
+            error={errors.first_name?.message}
+            placeholder="Enter your first name"
+          />
+          <Input
+            name="last_name"
+            label="LAST NAME"
+            register={register("last_name")}
+            error={errors.last_name?.message}
+            placeholder="Enter your last name"
+          />
+        </div>
+        <Input
+          name="username"
+          label="USERNAME"
+          register={register("username")}
+          error={errors.username?.message}
+          placeholder="Enter your username"
+        />
         <Input
           name="email"
           label="EMAIL"
@@ -69,7 +92,7 @@ const Signup = () => {
           <p className="text-xl text-white font-medium">Remember me</p>
         </div>
 
-        <div className="mt-12 w-full">
+        <div className="lg:mt-12 mt-10 w-full">
           <Button
             variant={variantTypes.full}
             isFull
@@ -80,10 +103,10 @@ const Signup = () => {
         </div>
       </form>
 
-      <div className="lg:mt-24 mt-14 flex flex-col justify-center items-center gap-10">
+      <div className="lg:mt-24 mt-14 flex flex-col justify-center items-center lg:gap-10 gap-16">
         <Link href="#" className="font-medium text-lg text-white">
-          New to BitPool ?{" "}
-          <span className="text-secondary-100">Create a BitPool Account</span>
+          Already have an account ?{" "}
+          <span className="text-secondary-100">Sign In</span>
         </Link>
 
         <div className="flex flex-col justify-center items-center gap-2">

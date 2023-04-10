@@ -5,14 +5,19 @@ import { useState } from "react";
 import Button, { variantTypes } from "../Button";
 import Login from "../Login";
 import Modal from "../Modal";
+import Signup from "../Signup";
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isOpenLogin, setIsOpenLogin] = useState(false);
+  const [isOpenSignup, setIsOpenSignup] = useState(false);
 
-  const toggle = (isLogin?: boolean) => {
-    setIsOpen(!isOpen);
-    setIsLogin(isLogin ? isLogin : true);
+  const toggleLogin = () => {
+    setIsOpenSignup(false);
+    setIsOpenLogin(!isOpenLogin);
+  };
+  const toggleSignup = () => {
+    setIsOpenLogin(false);
+    setIsOpenSignup(!isOpenSignup);
   };
   return (
     <>
@@ -34,9 +39,9 @@ const Header = () => {
               text="Create Challenge"
             />
             <div className="flex items-center gap-4">
-              <Button onClick={() => toggle(false)} px="px-7" text="SIGN UP" />
+              <Button onClick={toggleSignup} px="px-7" text="SIGN UP" />
               <Button
-                onClick={toggle}
+                onClick={toggleLogin}
                 variant={variantTypes.outline}
                 text="SIGN IN"
               />
@@ -63,10 +68,11 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <Button text="SIGN UP" />
+          <Button onClick={toggleSignup} text="SIGN UP" />
         </header>
       </div>
-      <Modal Body={Login} isOpen={isOpen} close={toggle} />
+      <Modal key={0} Body={Login} isOpen={isOpenLogin} close={toggleLogin} />
+      <Modal key={1} Body={Signup} isOpen={isOpenSignup} close={toggleSignup} />
     </>
   );
 };

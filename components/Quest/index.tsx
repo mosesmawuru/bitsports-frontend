@@ -55,7 +55,7 @@ const QuestComponent = (prop: IProp) => {
   );
 };
 
-const QuestItem = (prop: ItemIProp) => {
+const QuestItem = (prop: IItemProp) => {
   return (
     <div
       className={`flex flex-col items-center ${prop.index > 1 && "hide"}`}
