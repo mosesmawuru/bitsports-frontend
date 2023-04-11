@@ -5,6 +5,7 @@ const Tutorial = () => {
       width="23.955"
       height="28.746"
       viewBox="0 0 23.955 28.746"
+      className="nav-icon"
     >
       <path
         id="Path_1235"

@@ -5,11 +5,13 @@ import { useState } from "react";
 import Button, { variantTypes } from "../Button";
 import Login from "../Login";
 import Modal from "../Modal";
+import { MobileNav } from "../Nav";
 import Signup from "../Signup";
 
 const Header = () => {
   const [isOpenLogin, setIsOpenLogin] = useState(false);
   const [isOpenSignup, setIsOpenSignup] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   const toggleLogin = () => {
     setIsOpenSignup(false);
@@ -18,6 +20,9 @@ const Header = () => {
   const toggleSignup = () => {
     setIsOpenLogin(false);
     setIsOpenSignup(!isOpenSignup);
+  };
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
   };
   return (
     <>
@@ -50,7 +55,9 @@ const Header = () => {
         </header>
         <header className="flex justify-between items-center xl:hidden bg-primary-50 px-5 py-4">
           <div className="flex items-center gap-6">
-            <MenuBars />
+            <div onClick={toggleNav}>
+              <MenuBars />
+            </div>
             <Image
               priority={true}
               height={53.75}
@@ -71,6 +78,7 @@ const Header = () => {
           <Button onClick={toggleSignup} text="SIGN UP" />
         </header>
       </div>
+      <MobileNav open={isNavOpen} close={toggleNav} />
       <Modal key={0} Body={Login} isOpen={isOpenLogin} close={toggleLogin} />
       <Modal key={1} Body={Signup} isOpen={isOpenSignup} close={toggleSignup} />
     </>

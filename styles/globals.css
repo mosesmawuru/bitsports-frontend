@@ -153,6 +153,23 @@ body {
   background-size: cover;
 }
 
+.mobile-nav-container {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+  .nav-icon {
+    width: 36.51px;
+    height: 36.51px;
+  }
+
+  .mobile-nav {
+    width: 40%;
+  }
+}
+
 @media screen and (max-width: 480px) {
   html,
   body {
@@ -179,5 +196,9 @@ body {
   .modal-container {
     background: transparent;
     backdrop-filter: blur(2px);
+  }
+
+  .mobile-nav {
+    width: 70%;
   }
 }

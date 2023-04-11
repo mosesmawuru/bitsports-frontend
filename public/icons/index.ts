@@ -13,6 +13,7 @@ import Nft from "./nft";
 import Tutorial from "./tutorial";
 import Contact from "./contact";
 import Check from "./check";
+import Cancel from "./cancel";
 
 export {
   MenuBars,
@@ -30,4 +31,5 @@ export {
   Tutorial,
   Contact,
   Check,
+  Cancel,
 };

@@ -5,6 +5,7 @@ const Dapp = () => {
       width="28.891"
       height="28.724"
       viewBox="0 0 28.891 28.724"
+      className="nav-icon"
     >
       <path
         id="Exclusion_67"

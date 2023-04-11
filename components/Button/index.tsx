@@ -52,7 +52,7 @@ const Button = ({
             : variant === "secondary"
             ? "bg-secondary-150 border-secondary-150"
             : variant === "outline"
-            ? "bg-black border border-secondary-50"
+            ? "bg-transparent border border-secondary-50"
             : variant === "full"
             ? "bg-secondary-100 border-secondary-100"
             : ""

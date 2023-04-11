@@ -7,6 +7,7 @@ const News = () => {
       width="22.922"
       height="27.649"
       viewBox="0 0 22.922 27.649"
+      className="nav-icon"
     >
       <path
         id="Path_1226"

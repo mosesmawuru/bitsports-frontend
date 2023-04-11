@@ -7,6 +7,7 @@ const Ball = ({ fill, width, height }) => {
       width={width || "28.014"}
       height={height || "28.014"}
       viewBox="0 0 28.014 28.014"
+      className="nav-icon"
     >
       <g id="Layer_1" data-name="Layer 1">
         <path

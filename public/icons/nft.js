@@ -6,6 +6,7 @@ const Nft = () => {
       width="35.559"
       height="28.892"
       viewBox="0 0 35.559 28.892"
+      className="nav-icon"
     >
       <path
         id="Path_980"

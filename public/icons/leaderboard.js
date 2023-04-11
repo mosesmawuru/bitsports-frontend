@@ -7,6 +7,7 @@ const Leaderboard = () => {
       width="23.831"
       height="24.792"
       viewBox="0 0 23.831 24.792"
+      className="nav-icon"
     >
       <path
         id="Exclusion_134"
