@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="w-full">
       <Header />
-      <div className="container mx-auto">
+      <div className="container mx-auto px-4 lg:px-0">
         <div className="banner w-full relative mt-5 xl:mt-0">
           <div className="win relative" />
           <div className="flex flex-col justify-center items-center relative banner-text">

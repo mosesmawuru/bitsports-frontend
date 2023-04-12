@@ -128,12 +128,25 @@ body {
   top: 30%;
 }
 
+.pool-win {
+  background-image: url("/win.png");
+  height: 140px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  top: 20%;
+}
+
 .item {
   width: 66%;
 }
 
 .banner-text {
   top: 13%;
+}
+
+.pool-banner-text {
+  top: 3%;
 }
 
 .nav-link:hover .nav-item {
@@ -180,6 +193,14 @@ body {
   left: 40%;
 }
 
+.pool-banner {
+  background-image: url("/pool-banner.png");
+  height: 381px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 @media screen and (max-width: 1024px) {
   .nav-icon {
     width: 36.51px;
@@ -205,13 +226,20 @@ body {
     background-color: #232323;
   }
 
-  .win {
+  .win,
+  .pool-win {
     display: none;
   }
 
   .banner {
     background-image: url("/Hotpot.png");
     height: 168px;
+  }
+
+  .pool-banner {
+    height: 158px;
+    background-image: url("/pool-banner-mobile.png");
+    background-size: cover;
   }
 
   .item {

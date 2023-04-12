@@ -66,7 +66,7 @@ const items = [
   {
     title: "NEWS & EVENTS",
     icon: <News />,
-    url: "#",
+    url: "/events",
   },
   {
     title: "TUTORIAL",

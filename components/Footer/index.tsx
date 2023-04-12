@@ -1,5 +1,6 @@
 import { Lock } from "@/public/icons";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const items = [
   { title: "Terms of User", url: "/terms" },
@@ -8,6 +9,8 @@ const items = [
 ];
 
 const Footer = () => {
+  const router = useRouter();
+  const isNftRoute = router.route.includes("/nft");
   return (
     <>
       <footer className="hidden mt-56 py-6 container mx-auto lg:flex lg:justify-between lg:items-center border-t border-primary-600">
@@ -26,7 +29,11 @@ const Footer = () => {
         </div>
       </footer>
 
-      <footer className="lg:hidden mt-80 flex justify-center">
+      <footer
+        className={`lg:hidden flex justify-center ${
+          isNftRoute ? "mt-80" : "mt-20"
+        }`}
+      >
         <Lock />
       </footer>
     </>
