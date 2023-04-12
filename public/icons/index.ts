@@ -16,6 +16,7 @@ import Check from "./check";
 import Cancel from "./cancel";
 import Cup from "./cup";
 import Star from "./star";
+import Game from "./game";
 
 export {
   MenuBars,
@@ -36,4 +37,5 @@ export {
   Cancel,
   Cup,
   Star,
+  Game,
 };

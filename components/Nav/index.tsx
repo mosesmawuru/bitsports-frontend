@@ -16,6 +16,8 @@ import {
 import Link from "next/link";
 import Button, { variantTypes } from "../Button";
 import { useEffect, useState } from "react";
+import Modal from "../Modal";
+import { NoChallenge } from "../Header";
 
 const itemVariants: Variants = {
   open: {
@@ -118,6 +120,7 @@ const DesktopNav = () => {
 
 const MobileNav = ({ open, close }: { open: boolean; close: () => void }) => {
   const [isOpen, setIsOpen] = useState(open);
+  const [isChallengeOpen, setIsChallengeOpen] = useState(false);
 
   const handleClose = () => {
     setIsOpen(!isOpen);
@@ -126,69 +129,87 @@ const MobileNav = ({ open, close }: { open: boolean; close: () => void }) => {
     }, 200);
   };
 
+  const toggleChallenge = () => {
+    setIsChallengeOpen(!isChallengeOpen);
+  };
+
   useEffect(() => {
     setIsOpen(open);
   }, [open]);
   return (
-    <motion.nav
-      animate={isOpen ? "open" : "closed"}
-      transition={{ ease: "easeOut", duration: 2 }}
-      onClick={handleClose}
-      className={`${
-        open ? "fixed" : "hidden"
-      } xl:hidden z-30 left-0 top-0 mobile-nav-container`}
-    >
-      <motion.div
-        animate={{ opacity: isOpen ? 1 : 0 }}
-        exit={{ opacity: isOpen ? 0 : 1 }}
-        transition={{ ease: "easeOut", duration: 0.4 }}
-        className="p-5 z-50 mobile-nav bg-primary-800 max-h-screen h-screen overflow-y-auto"
+    <>
+      <motion.nav
+        animate={isOpen ? "open" : "closed"}
+        transition={{ ease: "easeOut", duration: 2 }}
+        onClick={handleClose}
+        className={`${
+          open ? "fixed" : "hidden"
+        } xl:hidden z-30 left-0 top-0 mobile-nav-container`}
       >
-        <div className="flex items-center justify-between gap-4">
-          <Image
-            priority={true}
-            height={53.75}
-            width={65.39}
-            src={PoolLogo}
-            alt="pool logo"
-          />
-          <div>
-            <h1 className="text-2xl font-bold text-white">BITPOOL</h1>
-            <div className="flex items-center justify-center gap-1">
-              <OfficialLogo size="15" />
-              <div className="text-primary-300 text-xs pt-0.5 font-Poppins">
-                Official Page
+        <motion.div
+          animate={{ opacity: isOpen ? 1 : 0 }}
+          exit={{ opacity: isOpen ? 0 : 1 }}
+          transition={{ ease: "easeOut", duration: 0.4 }}
+          className="p-5 z-50 mobile-nav bg-primary-800 max-h-screen h-screen overflow-y-auto"
+        >
+          <div className="flex items-center justify-between gap-4">
+            <Image
+              priority={true}
+              height={53.75}
+              width={65.39}
+              src={PoolLogo}
+              alt="pool logo"
+            />
+            <div>
+              <h1 className="text-2xl font-bold text-white">BITPOOL</h1>
+              <div className="flex items-center justify-center gap-1">
+                <OfficialLogo size="15" />
+                <div className="text-primary-300 text-xs pt-0.5 font-Poppins">
+                  Official Page
+                </div>
               </div>
             </div>
-          </div>
-          <motion.div whileTap={{ scale: 0.97 }} onClick={handleClose}>
-            <Cancel />
-          </motion.div>
-        </div>
-        <div className="mt-10 flex justify-center">
-          <Button
-            variant={variantTypes.outline}
-            px="px-8"
-            text="Create Challenge"
-          />
-        </div>
-        <motion.div variants={variants} className="flex flex-col gap-12 mt-10">
-          {items.map((item) => (
-            <motion.div variants={itemVariants} key={item.title}>
-              <Link
-                href={item.url}
-                className="flex gap-4 duration-300 text-primary-700 hover:text-white items-center nav-link"
-              >
-                {item.icon}
-                <p className="xl:text-sm text-base font-semibold text-center">
-                  {item.title}
-                </p>
-              </Link>
+            <motion.div whileTap={{ scale: 0.97 }} onClick={handleClose}>
+              <Cancel />
             </motion.div>
-          ))}
+          </div>
+          <div className="mt-10 flex justify-center">
+            <Button
+              variant={variantTypes.outline}
+              px="px-8"
+              text="Create Challenge"
+              onClick={toggleChallenge}
+            />
+          </div>
+          <motion.div
+            variants={variants}
+            className="flex flex-col gap-12 mt-10"
+          >
+            {items.map((item) => (
+              <motion.div variants={itemVariants} key={item.title}>
+                <Link
+                  href={item.url}
+                  className="flex gap-4 duration-300 text-primary-700 hover:text-white items-center nav-link"
+                >
+                  {item.icon}
+                  <p className="xl:text-sm text-base font-semibold text-center">
+                    {item.title}
+                  </p>
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </motion.nav>
+      </motion.nav>
+
+      <Modal
+        key={2}
+        Body={NoChallenge}
+        isOpen={isChallengeOpen}
+        close={toggleChallenge}
+        isVoid
+      />
+    </>
   );
 };
 

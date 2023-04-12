@@ -23,6 +23,8 @@ module.exports = {
           700: "#777786",
           750: "#C6C6C6",
           800: "#24242C",
+          850: "#28282D",
+          900: "#E5E5E5",
         },
         secondary: {
           50: "#BD2344",
@@ -40,7 +42,7 @@ module.exports = {
       },
       minHeight: {
         "90vh": "90vh",
-        "60vh": "60vh",
+        "30vh": "30vh",
       },
       maxHeight: {
         "90vh": "90vh",

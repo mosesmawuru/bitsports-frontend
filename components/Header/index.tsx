@@ -1,4 +1,4 @@
-import { MenuBars, OfficialLogo } from "@/public/icons";
+import { Game, MenuBars, OfficialLogo } from "@/public/icons";
 import PoolLogo from "@/public/pool-logo.png";
 import Image from "next/image";
 import { useState } from "react";
@@ -12,6 +12,7 @@ const Header = () => {
   const [isOpenLogin, setIsOpenLogin] = useState(false);
   const [isOpenSignup, setIsOpenSignup] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isChallengeOpen, setIsChallengeOpen] = useState(false);
 
   const toggleLogin = () => {
     setIsOpenSignup(false);
@@ -23,6 +24,9 @@ const Header = () => {
   };
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
+  };
+  const toggleChallenge = () => {
+    setIsChallengeOpen(!isChallengeOpen);
   };
   return (
     <>
@@ -42,6 +46,7 @@ const Header = () => {
               variant={variantTypes.outline}
               px="px-5"
               text="Create Challenge"
+              onClick={toggleChallenge}
             />
             <div className="flex items-center gap-4">
               <Button onClick={toggleSignup} px="px-7" text="SIGN UP" />
@@ -81,8 +86,29 @@ const Header = () => {
       <MobileNav open={isNavOpen} close={toggleNav} />
       <Modal key={0} Body={Login} isOpen={isOpenLogin} close={toggleLogin} />
       <Modal key={1} Body={Signup} isOpen={isOpenSignup} close={toggleSignup} />
+      <Modal
+        key={2}
+        Body={NoChallenge}
+        isOpen={isChallengeOpen}
+        close={toggleChallenge}
+        isVoid
+      />
     </>
   );
 };
 
 export default Header;
+
+export const NoChallenge = () => {
+  return (
+    <div className="flex flex-col justify-center items-center gap-7">
+      <Game />
+      <div className="lg:text-2xl text-xl font-bold text-primary-900">
+        CREATE CHALLENGE
+      </div>
+      <div className="lg:text-xl text-lg font-bold text-primary-450">
+        This Feature Is Coming Soon
+      </div>
+    </div>
+  );
+};

@@ -1,9 +1,5 @@
 import Image from "next/image";
-import Banner from "@/public/banner2.png";
 import { Button, Header } from "@/components";
-import Pagination from "@/components/Pagination";
-import QuestComponent from "@/components/Quest";
-import { Lock } from "@/public/icons";
 import Footer from "@/components/Footer";
 import event1 from "@/public/event1.svg";
 import event2 from "@/public/event2.svg";
