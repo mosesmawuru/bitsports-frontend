@@ -51,12 +51,12 @@ const items = [
   {
     title: "QUEST",
     icon: <Ball fill="#777786" />,
-    url: "#",
+    url: "/",
   },
   {
     title: "NFT",
     icon: <Nft />,
-    url: "#",
+    url: "/nft",
   },
   {
     title: "LEADERBOARD",

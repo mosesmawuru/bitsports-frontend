@@ -165,6 +165,21 @@ body {
   line-height: 30px;
 }
 
+.nft-text {
+  text-shadow: -0.5px 0 white, 0 0.5px white, 0.5px 0 white, 0 -0.5px white;
+  font-size: 100px;
+  line-height: 30px;
+}
+
+.nft-sub {
+  padding: 0 500px;
+}
+
+.announce {
+  top: 50%;
+  left: 40%;
+}
+
 @media screen and (max-width: 1024px) {
   .nav-icon {
     width: 36.51px;
@@ -176,6 +191,10 @@ body {
   }
 
   .leader {
+    line-height: 55px;
+  }
+
+  .nft-text {
     line-height: 55px;
   }
 }
@@ -217,6 +236,11 @@ body {
     line-height: 30px;
   }
 
+  .nft-text {
+    font-size: 60px;
+    line-height: 40px;
+  }
+
   .leader-icon {
     width: 176px;
     height: 157px;
@@ -224,5 +248,24 @@ body {
 
   .mint {
     line-height: 20px;
+  }
+
+  .announce {
+    top: 45%;
+    left: 32%;
+  }
+
+  .nft {
+    width: 212px;
+    height: 121px;
+  }
+
+  .nft2 {
+    width: 190px;
+    height: 121px;
+  }
+
+  .nft-sub {
+    padding: 0 40px;
   }
 }

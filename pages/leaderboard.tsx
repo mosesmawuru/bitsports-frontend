@@ -1,5 +1,46 @@
 import { Header } from "@/components";
-import { Cup } from "@/public/icons";
+import Footer from "@/components/Footer";
+import { Cup, Star } from "@/public/icons";
+import user from "@/public/user-img.svg";
+import Image from "next/image";
+
+const items = [
+  {
+    rank: 1,
+    image: user,
+    star: <Star />,
+    username: "Meister",
+    score: "123454398",
+  },
+  {
+    rank: 2,
+    image: user,
+    star: <Star />,
+    username: "Meister",
+    score: "123454398",
+  },
+  {
+    rank: 3,
+    image: user,
+    star: <Star />,
+    username: "Meister",
+    score: "123454398",
+  },
+  {
+    rank: 4,
+    image: user,
+    star: <Star />,
+    username: "Meister",
+    score: "123454398",
+  },
+  {
+    rank: 5,
+    image: user,
+    star: <Star />,
+    username: "Meister",
+    score: "123454398",
+  },
+];
 
 const Leaderboard = () => {
   return (
@@ -19,7 +60,42 @@ const Leaderboard = () => {
             GAMERS IN THE METAVERSE.
           </div>
         </div>
+
+        <section className="relative">
+          <div className="mt-10 flex flex-col gap-1.5 blur-md">
+            {items.map((item) => (
+              <div
+                key={item.rank}
+                className="flex justify-between items-center bg-primary-200 lg:h-20 h-14 px-3 lg:px-16"
+              >
+                <div className="flex items-center lg:gap-16 gap-8">
+                  <div className="font-bold lg:text-2xl text-base text-white">
+                    {item.rank}
+                  </div>
+                  <Image
+                    priority={true}
+                    height={40}
+                    width={39}
+                    src={item.image}
+                    alt="user image"
+                  />
+                  {item.star}
+                  <div className="font-bold font-Poppins lg:text-xl text-base text-white">
+                    {item.username}
+                  </div>
+                </div>
+                <div className="font-bold font-Poppins lg:text-xl text-base text-white">
+                  {item.score}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="font-bold absolute announce lg:text-2xl text-base text-white">
+            TO BE ANNOUNCED SOON
+          </div>
+        </section>
       </div>
+      <Footer />
     </div>
   );
 };
