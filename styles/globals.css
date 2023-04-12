@@ -201,6 +201,10 @@ body {
   background-size: contain;
 }
 
+.ten {
+  font-size: 10px;
+}
+
 @media screen and (max-width: 1024px) {
   .nav-icon {
     width: 36.51px;

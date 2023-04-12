@@ -17,6 +17,10 @@ import Cancel from "./cancel";
 import Cup from "./cup";
 import Star from "./star";
 import Game from "./game";
+import Message from "./message";
+import Bell from "./bell";
+import QC from "./qc";
+import USDG from "./usdg";
 
 export {
   MenuBars,
@@ -38,4 +42,8 @@ export {
   Cup,
   Star,
   Game,
+  Message,
+  Bell,
+  QC,
+  USDG,
 };

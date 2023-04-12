@@ -1,5 +1,15 @@
-import { Game, MenuBars, OfficialLogo } from "@/public/icons";
+import {
+  ArrowDown,
+  Bell,
+  Game,
+  MenuBars,
+  Message,
+  OfficialLogo,
+  QC,
+  USDG,
+} from "@/public/icons";
 import PoolLogo from "@/public/pool-logo.png";
+import Profile from "@/public/profile.png";
 import Image from "next/image";
 import { useState } from "react";
 import Button, { variantTypes } from "../Button";
@@ -9,6 +19,7 @@ import { MobileNav } from "../Nav";
 import Signup from "../Signup";
 
 const Header = () => {
+  const [loggedIn, setLoggedIn] = useState(true);
   const [isOpenLogin, setIsOpenLogin] = useState(false);
   const [isOpenSignup, setIsOpenSignup] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -42,20 +53,60 @@ const Header = () => {
             </div>
           </div>
           <div className="flex items-center gap-12">
-            <Button
-              variant={variantTypes.outline}
-              px="px-5"
-              text="Create Challenge"
-              onClick={toggleChallenge}
-            />
-            <div className="flex items-center gap-4">
-              <Button onClick={toggleSignup} px="px-7" text="SIGN UP" />
+            <div className="flex items-center gap-7">
               <Button
-                onClick={toggleLogin}
                 variant={variantTypes.outline}
-                text="SIGN IN"
+                px="px-5"
+                text="Create Challenge"
+                onClick={toggleChallenge}
               />
+              <div className="cursor-pointer hidden xl:block">
+                <Message />
+              </div>
+              <div className="cursor-pointer relative hidden xl:block">
+                <Bell />
+                <div className="bg-secondary-250 absolute top-2.5 -right-2 h-4 w-4 rounded-full flex justify-center items-center">
+                  <div className="text-white font-bold ten">3</div>
+                </div>
+              </div>
+              <div className="flex items-center">
+                <div className="cursor-pointer px-6 py-7 flex items-center gap-3.5 bg-primary-950 rounded-l h-12">
+                  <USDG />
+                  <div className="font-medium lg:text-base text-xs text-white font-Poppins">
+                    33 USDG
+                  </div>
+                  <div className="ml-3">
+                    <QC />
+                  </div>
+                  <div className="font-medium flex lg:text-base text-xs text-white font-Poppins">
+                    5 QC
+                  </div>
+                </div>
+                <div className="cursor-pointer relative px-6 py-7 justify-center items-center bg-primary-1000 rounded-br h-12">
+                  <ArrowDown />
+                  <div className="h-9 w-9 bg-primary-200 rotate-45 -top-5 -right-7 absolute"></div>
+                </div>
+              </div>
             </div>
+            {loggedIn ? (
+              <Image
+                priority={true}
+                height={75}
+                width={79}
+                src={Profile}
+                alt="profile"
+                className="cursor-pointer"
+              />
+            ) : (
+              <div className="flex items-center gap-4">
+                <Button onClick={toggleSignup} px="px-7" text="SIGN UP" />
+                <Button
+                  onClick={toggleLogin}
+                  variant={variantTypes.outline}
+                  text="SIGN IN"
+                />
+              </div>
+            )}
           </div>
         </header>
         <header className="flex justify-between items-center xl:hidden bg-primary-50 px-5 py-4">
@@ -65,22 +116,39 @@ const Header = () => {
             </div>
             <Image
               priority={true}
-              height={53.75}
-              width={65.39}
+              height={51.31}
+              width={45}
               src={PoolLogo}
               alt="pool logo"
             />
             <div>
-              <h1 className="text-2xl font-bold text-white">BITPOOL</h1>
+              <h1 className="text-xl font-bold text-white">BITPOOL</h1>
               <div className="flex items-center justify-center gap-1">
                 <OfficialLogo size="15" />
-                <div className="text-primary-300 text-xs pt-0.5 font-Poppins">
+                <div className="text-primary-300 ten pt-0.5 font-Poppins">
                   Official Page
                 </div>
               </div>
             </div>
           </div>
-          <Button onClick={toggleSignup} text="SIGN UP" />
+          {loggedIn ? (
+            <div className="flex items-center">
+              <div className="cursor-pointe px-2 py-3 flex items-center gap-3 bg-primary-950 h-8 rounded-l">
+                <USDG width={17} height={19.75} />
+                <div className="font-medium lg:text-base ten text-white font-Poppins">
+                  33
+                </div>
+              </div>
+              <div className="cursor-pointer relative px-3 py-3 flex justify-center items-center bg-primary-1000 h-8 rounded-br">
+                <ArrowDown />
+                <div className="h-4 w-4 bg-primary-50 rotate-45 -top-2 -right-2.5 absolute"></div>
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center gap-4">
+              <Button onClick={toggleSignup} text="SIGN UP" />
+            </div>
+          )}
         </header>
       </div>
       <MobileNav open={isNavOpen} close={toggleNav} />

@@ -1,4 +1,5 @@
 import { ArrowDown, Quest } from "@/public/icons";
+import Link from "next/link";
 import Button, { variantTypes, volumeTypes } from "../Button";
 
 export interface IItemProp {
@@ -42,12 +43,14 @@ const QuestComponent = (prop: IProp) => {
       {quests.map((quest, index) => (
         <QuestItem key={index} index={index} {...quest} />
       ))}
-      <Button
-        variant={variantTypes.secondary}
-        textVol={volumeTypes.sm}
-        px="xl:px-20 px-5"
-        text="ACCEPT"
-      />
+      <Link href="/game">
+        <Button
+          variant={variantTypes.secondary}
+          textVol={volumeTypes.sm}
+          px="xl:px-20 px-5"
+          text="ACCEPT"
+        />
+      </Link>
       <div className="cursor-pointer xl:hidden self-center">
         <ArrowDown />
       </div>

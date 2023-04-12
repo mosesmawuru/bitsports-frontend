@@ -2,6 +2,7 @@ import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 
 import PoolLogo from "@/public/pool-logo.png";
+import Profile from "@/public/profile.png";
 import {
   Ball,
   Cancel,
@@ -136,6 +137,7 @@ const DesktopNav = () => {
 
 const MobileNav = ({ open, close }: { open: boolean; close: () => void }) => {
   const [isOpen, setIsOpen] = useState(open);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [isChallengeOpen, setIsChallengeOpen] = useState(false);
 
   const handleClose = () => {
@@ -189,7 +191,22 @@ const MobileNav = ({ open, close }: { open: boolean; close: () => void }) => {
               <Cancel />
             </motion.div>
           </div>
-          <div className="mt-10 flex justify-center">
+          <div className="mt-10 flex flex-col justify-center items-center gap-5">
+            {loggedIn && (
+              <div className="flex flex-col justify-center items-center">
+                <Image
+                  priority={true}
+                  height={75}
+                  width={79}
+                  src={Profile}
+                  alt="profile"
+                  className="cursor-pointer"
+                />
+                <h4 className="text-center font-bold text-lg text-primary-450 mt-2">
+                  BITSPORT_ADMIN
+                </h4>
+              </div>
+            )}
             <Button
               variant={variantTypes.outline}
               px="px-8"
