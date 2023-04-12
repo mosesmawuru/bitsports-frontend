@@ -78,7 +78,8 @@ const items = [
   {
     title: "DAPP",
     icon: <Dapp />,
-    url: "#",
+    url: "https://app.bitsport.gg/",
+    isExternal: true,
   },
 ];
 
@@ -100,13 +101,28 @@ const DesktopNav = () => {
       <motion.div variants={variants} className="flex flex-col gap-12 mt-10">
         {items.map((item) => (
           <motion.div variants={itemVariants} key={item.title}>
-            <Link
-              href={item.url}
-              className="flex gap-2 flex-col duration-300 justify-center text-primary-700 hover:text-white items-center nav-link"
-            >
-              {item.icon}
-              <p className="text-sm font-semibold text-center">{item.title}</p>
-            </Link>
+            {!item.isExternal ? (
+              <Link
+                href={item.url}
+                className="flex gap-2 flex-col duration-300 justify-center text-primary-700 hover:text-white items-center nav-link"
+              >
+                {item.icon}
+                <p className="text-sm font-semibold text-center">
+                  {item.title}
+                </p>
+              </Link>
+            ) : (
+              <a
+                href={item.url}
+                target="_blank"
+                className="flex gap-2 flex-col duration-300 justify-center text-primary-700 hover:text-white items-center nav-link"
+              >
+                {item.icon}
+                <p className="text-sm font-semibold text-center">
+                  {item.title}
+                </p>
+              </a>
+            )}
           </motion.div>
         ))}
       </motion.div>
@@ -187,15 +203,28 @@ const MobileNav = ({ open, close }: { open: boolean; close: () => void }) => {
           >
             {items.map((item) => (
               <motion.div variants={itemVariants} key={item.title}>
-                <Link
-                  href={item.url}
-                  className="flex gap-4 duration-300 text-primary-700 hover:text-white items-center nav-link"
-                >
-                  {item.icon}
-                  <p className="xl:text-sm text-base font-semibold text-center">
-                    {item.title}
-                  </p>
-                </Link>
+                {!item.isExternal ? (
+                  <Link
+                    href={item.url}
+                    className="flex gap-4 duration-300 text-primary-700 hover:text-white items-center nav-link"
+                  >
+                    {item.icon}
+                    <p className="xl:text-sm text-base font-semibold text-center">
+                      {item.title}
+                    </p>
+                  </Link>
+                ) : (
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    className="flex gap-4 duration-300 text-primary-700 hover:text-white items-center nav-link"
+                  >
+                    {item.icon}
+                    <p className="xl:text-sm text-base font-semibold text-center">
+                      {item.title}
+                    </p>
+                  </a>
+                )}
               </motion.div>
             ))}
           </motion.div>
