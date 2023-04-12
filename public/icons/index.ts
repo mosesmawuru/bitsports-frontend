@@ -14,6 +14,7 @@ import Tutorial from "./tutorial";
 import Contact from "./contact";
 import Check from "./check";
 import Cancel from "./cancel";
+import Cup from "./cup";
 
 export {
   MenuBars,
@@ -32,4 +33,5 @@ export {
   Contact,
   Check,
   Cancel,
+  Cup,
 };

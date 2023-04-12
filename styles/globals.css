@@ -159,6 +159,12 @@ body {
   width: 100%;
 }
 
+.leader {
+  text-shadow: -0.5px 0 white, 0 0.5px white, 0.5px 0 white, 0 -0.5px white;
+  font-size: 90px;
+  line-height: 30px;
+}
+
 @media screen and (max-width: 1024px) {
   .nav-icon {
     width: 36.51px;
@@ -167,6 +173,10 @@ body {
 
   .mobile-nav {
     width: 40%;
+  }
+
+  .leader {
+    line-height: 55px;
   }
 }
 
@@ -200,5 +210,19 @@ body {
 
   .mobile-nav {
     width: 70%;
+  }
+
+  .leader {
+    font-size: 40px;
+    line-height: 30px;
+  }
+
+  .leader-icon {
+    width: 176px;
+    height: 157px;
+  }
+
+  .mint {
+    line-height: 20px;
   }
 }

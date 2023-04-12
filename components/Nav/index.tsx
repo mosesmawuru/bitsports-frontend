@@ -61,7 +61,7 @@ const items = [
   {
     title: "LEADERBOARD",
     icon: <Leaderboard />,
-    url: "#",
+    url: "/leaderboard",
   },
   {
     title: "NEWS & EVENTS",
