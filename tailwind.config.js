@@ -27,6 +27,8 @@ module.exports = {
           900: "#E5E5E5",
           950: "#47474F",
           1000: "#39393F",
+          1050: "#1F2027",
+          1100: "#909093",
         },
         secondary: {
           50: "#BD2344",
@@ -34,6 +36,7 @@ module.exports = {
           150: "#D41105",
           200: "#BABABA",
           250: "#D3274C",
+          300: "#D0AA2C",
         },
       },
       fontFamily: {
@@ -42,6 +45,7 @@ module.exports = {
       },
       width: {
         modal: "470px",
+        table: "87%",
       },
       minHeight: {
         "90vh": "90vh",

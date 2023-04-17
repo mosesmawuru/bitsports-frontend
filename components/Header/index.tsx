@@ -11,6 +11,7 @@ import {
 import PoolLogo from "@/public/pool-logo.png";
 import Profile from "@/public/profile.png";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import Button, { variantTypes } from "../Button";
 import Login from "../Login";
@@ -70,18 +71,20 @@ const Header = () => {
                 </div>
               </div>
               <div className="flex items-center">
-                <div className="cursor-pointer px-6 py-7 flex items-center gap-3.5 bg-primary-950 rounded-l h-12">
-                  <USDG />
-                  <div className="font-medium lg:text-base text-xs text-white font-Poppins">
-                    33 USDG
+                <Link href="/wallet">
+                  <div className="cursor-pointer px-6 py-7 flex items-center gap-3.5 bg-primary-950 rounded-l h-12">
+                    <USDG />
+                    <div className="font-medium lg:text-base text-xs text-white font-Poppins">
+                      33 USDG
+                    </div>
+                    <div className="ml-3">
+                      <QC />
+                    </div>
+                    <div className="font-medium flex lg:text-base text-xs text-white font-Poppins">
+                      5 QC
+                    </div>
                   </div>
-                  <div className="ml-3">
-                    <QC />
-                  </div>
-                  <div className="font-medium flex lg:text-base text-xs text-white font-Poppins">
-                    5 QC
-                  </div>
-                </div>
+                </Link>
                 <div className="cursor-pointer relative px-6 py-7 justify-center items-center bg-primary-1000 rounded-br h-12">
                   <ArrowDown />
                   <div className="h-9 w-9 bg-primary-200 rotate-45 -top-5 -right-7 absolute"></div>
@@ -133,12 +136,14 @@ const Header = () => {
           </div>
           {loggedIn ? (
             <div className="flex items-center">
-              <div className="cursor-pointe px-2 py-3 flex items-center gap-3 bg-primary-950 h-8 rounded-l">
-                <USDG width={17} height={19.75} />
-                <div className="font-medium lg:text-base ten text-white font-Poppins">
-                  33
+              <Link href="/wallet">
+                <div className="cursor-pointe px-2 py-3 flex items-center gap-3 bg-primary-950 h-8 rounded-l">
+                  <USDG width={17} height={19.75} />
+                  <div className="font-medium lg:text-base ten text-white font-Poppins">
+                    33
+                  </div>
                 </div>
-              </div>
+              </Link>
               <div className="cursor-pointer relative px-3 py-3 flex justify-center items-center bg-primary-1000 h-8 rounded-br">
                 <ArrowDown />
                 <div className="h-4 w-4 bg-primary-50 rotate-45 -top-2 -right-2.5 absolute"></div>

@@ -5,6 +5,7 @@ const USDG = ({ width, height }) => {
       width={width || "30.194"}
       height={height || "35.075"}
       viewBox="0 0 30.194 35.075"
+      className="sm-coin"
     >
       <g
         id="Group_1462"

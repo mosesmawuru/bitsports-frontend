@@ -1,10 +1,11 @@
-const QC = () => {
+const QC = ({ height, width }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="29.759"
-      height="34.569"
+      width={width || "29.759"}
+      height={height || "34.569"}
       viewBox="0 0 29.759 34.569"
+      className="sm-coin"
     >
       <g
         id="Group_1461"
