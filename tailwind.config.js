@@ -29,6 +29,7 @@ module.exports = {
           1000: "#39393F",
           1050: "#1F2027",
           1100: "#909093",
+          1150: "#B9B9B9",
         },
         secondary: {
           50: "#BD2344",
@@ -38,6 +39,7 @@ module.exports = {
           250: "#D3274C",
           300: "#D0AA2C",
           350: "#67A707",
+          400: "#1E2126",
         },
       },
       fontFamily: {
@@ -45,7 +47,7 @@ module.exports = {
         Rajdhani: ["Rajdhani"],
       },
       width: {
-        modal: "470px",
+        modal: "550px",
         table: "87%",
       },
       minHeight: {

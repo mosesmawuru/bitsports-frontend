@@ -56,13 +56,15 @@ const Modal = ({ Body, isOpen = false, close, isVoid }: IModal) => {
               : "bg-primary-850 pt-4 pb-10 lg:pb-14"
           }`}
         >
-          <div
-            onClick={() => handleCancel(true)}
-            className={`h-7 w-7 self-end mb-10 cursor-pointer rounded-full bg-white flex justify-center items-center ${
-              !isVoid && "hidden"
-            }`}
-          >
-            <Cancel />
+          <div className="h-10 flex justify-end w-full">
+            <div
+              onClick={() => handleCancel(true)}
+              className={`h-5 w-5 self-end mb-7 cursor-pointer rounded-full bg-white flex justify-center items-center ${
+                !isVoid && "hidden"
+              }`}
+            >
+              <Cancel />
+            </div>
           </div>
           <Body />
         </div>

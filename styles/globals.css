@@ -205,6 +205,10 @@ body {
   font-size: 10px;
 }
 
+.thin-line {
+  height: 0.04px;
+}
+
 @media screen and (max-width: 1024px) {
   .nav-icon {
     width: 36.51px;
@@ -304,5 +308,10 @@ body {
   .sm-coin {
     width: 40px;
     height: 30px;
+  }
+
+  .sm-arrow {
+    width: 20px;
+    height: 20px;
   }
 }

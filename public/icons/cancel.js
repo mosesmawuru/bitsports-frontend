@@ -2,8 +2,8 @@ const Cancel = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="18.313"
-      height="18.313"
+      width="11.313"
+      height="11.313"
       viewBox="0 0 18.313 18.313"
     >
       <path

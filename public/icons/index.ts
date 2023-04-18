@@ -23,6 +23,10 @@ import QC from "./qc";
 import USDG from "./usdg";
 import Filter from "./filter";
 import EmptyTransaction from "./empty-transaction";
+import Swap from "./swap";
+import SwapArrow from "./swap-arrow";
+import SwapIcon from "./swap-icon";
+import SwapTo from "./swap-to";
 
 export {
   MenuBars,
@@ -50,4 +54,8 @@ export {
   USDG,
   Filter,
   EmptyTransaction,
+  Swap,
+  SwapArrow,
+  SwapIcon,
+  SwapTo,
 };

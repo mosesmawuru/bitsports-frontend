@@ -1,4 +1,4 @@
-import { Header } from "@/components";
+import { Header, Swap } from "@/components";
 import { EmptyTransaction, Filter, QC, USDG } from "@/public/icons";
 import Image from "next/image";
 import USDT from "@/public/usdt.png";
@@ -7,6 +7,8 @@ import Paypal from "@/public/paypal.png";
 import BUSD from "@/public/busd.png";
 import BITP from "@/public/bitp.png";
 import Footer from "@/components/Footer";
+import Modal from "@/components/Modal";
+import { useState } from "react";
 
 const items = [
   {
@@ -49,6 +51,11 @@ const items = [
 const navs = ["DEPOSIT", "WITHDRAW", "SWAP"];
 
 const Wallet = () => {
+  const [isSwapOpen, setIsSwapOpen] = useState(false);
+
+  const toggleSwap = () => {
+    setIsSwapOpen(!isSwapOpen);
+  };
   return (
     <div className="w-full">
       <Header />
@@ -86,7 +93,10 @@ const Wallet = () => {
               <div className="mr-20 xl:hidden">BALANCE</div>
               <div className="mr-20"></div>
               <div className="xl:mr-20">ACTION</div>
-              <button className="bg-secondary-300 hidden xl:block font-bold text-white h-10 px-20 lg:px-10 rounded">
+              <button
+                onClick={toggleSwap}
+                className="bg-secondary-300 hidden xl:block font-bold text-white h-10 px-20 lg:px-10 rounded"
+              >
                 SWAP
               </button>
             </div>
@@ -107,6 +117,9 @@ const Wallet = () => {
                   </div>
                   <div className="relative">
                     <button
+                      onClick={
+                        item.type !== "deposit" ? toggleSwap : () => null
+                      }
                       className={`${
                         item.type === "deposit"
                           ? "bg-secondary-150"
@@ -161,7 +174,13 @@ const Wallet = () => {
           </div>
         </div>
       </div>
-
+      <Modal
+        key={0}
+        Body={Swap}
+        isOpen={isSwapOpen}
+        close={toggleSwap}
+        isVoid
+      />
       <Footer />
     </div>
   );
