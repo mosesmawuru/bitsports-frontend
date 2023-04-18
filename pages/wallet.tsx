@@ -1,11 +1,12 @@
 import { Header } from "@/components";
-import { QC, USDG } from "@/public/icons";
+import { EmptyTransaction, Filter, QC, USDG } from "@/public/icons";
 import Image from "next/image";
 import USDT from "@/public/usdt.png";
 import QIC from "@/public/qc.png";
 import Paypal from "@/public/paypal.png";
 import BUSD from "@/public/busd.png";
 import BITP from "@/public/bitp.png";
+import Footer from "@/components/Footer";
 
 const items = [
   {
@@ -44,6 +45,8 @@ const items = [
     hasWithdraw: false,
   },
 ];
+
+const navs = ["DEPOSIT", "WITHDRAW", "SWAP"];
 
 const Wallet = () => {
   return (
@@ -108,11 +111,11 @@ const Wallet = () => {
                         item.type === "deposit"
                           ? "bg-secondary-150"
                           : "bg-secondary-300"
-                      } font-bold text-white ml-6 xl:ml-0 h-7 lg:h-9 px-1 lg:px-2 w-16 lg:w-24 lg:text-sm ten`}
+                      } font-bold text-white ml-10 xl:ml-0 h-7 lg:h-9 px-1 lg:px-2 w-16 lg:w-24 lg:text-sm ten`}
                     >
                       {item.type === "deposit" ? "DEPOSIT" : "SWAP"}
                     </button>
-                    <div className="xl:bg-primary-50 bg-primary-100 h-3 w-6 absolute rotate-45 -top-1.5 md:right-12 lg:right-20 xl:right-7 -right-6" />
+                    <div className="xl:bg-primary-50 bg-primary-100 h-3 w-6 absolute rotate-45 -top-1.5 md:right-9 lg:right-14 xl:right-7 -right-10" />
                   </div>
                   {item.hasWithdraw && (
                     <div className="relative">
@@ -124,13 +127,42 @@ const Wallet = () => {
                       {/* <div className="xl:bg-primary-50 bg-primary-100 h-3 w-6 absolute rotate-45 -top-1 md:right-12 lg:right-20 xl:-right-3 -right-6" /> */}
                     </div>
                   )}
+                  {item.hasWithdraw && (
+                    <button
+                      className={`font-bold xl:hidden text-sm text-white bg-secondary-350 h-7 lg:h-9 ten px-1 lg:px-2 w-16 lg:w-24`}
+                    >
+                      WITHDRAW
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
           </div>
         </div>
-        <div></div>
+        <div className="mt-14 xl:mt-0">
+          <h3 className="xl:text-2xl text-lg font-bold text-white text-left">
+            TRANSACTION HISTORY
+          </h3>
+          <div className="flex items-center gap-32 mt-6">
+            <div className="flex items-center gap-8">
+              {navs.map((item, index) => (
+                <div
+                  className="text-sm xl:text-lg font-bold text-primary-450"
+                  key={index}
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+            <Filter />
+          </div>
+          <div className="xl:mt-40 mt-32 flex justify-center">
+            <EmptyTransaction />
+          </div>
+        </div>
       </div>
+
+      <Footer />
     </div>
   );
 };
