@@ -10,7 +10,6 @@ const Swap = () => {
   const [step, setStep] = useState(0);
 
   const next = (num?: number) => {
-    console.log("this is num", num);
     if (num !== undefined) {
       setStep(step - 1);
     } else {
