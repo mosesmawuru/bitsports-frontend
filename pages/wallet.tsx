@@ -102,7 +102,10 @@ const Wallet = () => {
             </div>
             <div className="mt-7">
               {items.map((item, index) => (
-                <div className="grid grid-cols-5 py-5 border-b border-primary-550 items-center gap-0 font-medium lg:text-xl text-base text-white">
+                <div
+                  key={index}
+                  className="grid grid-cols-5 py-5 border-b border-primary-550 items-center gap-0 font-medium lg:text-xl text-base text-white"
+                >
                   <Image
                     priority={true}
                     height={50}

@@ -13,13 +13,17 @@ const Footer = () => {
   const isNftRoute = router.route.includes("/nft");
   return (
     <>
-      <footer className="hidden mt-56 py-6 container mx-auto lg:flex lg:justify-between lg:items-center border-t border-primary-600">
+      <footer
+        key={0}
+        className="hidden mt-56 py-6 container mx-auto lg:flex lg:justify-between lg:items-center border-t border-primary-600"
+      >
         <div className="font-Poppins text-primary-650 text-xl">
           BitPool @ 2023 By BitSport
         </div>
         <div className="flex items-center gap-8">
           {items.map((item) => (
             <Link
+              key={item.title}
               href={item.url}
               className="font-Poppins text-primary-650 text-lg"
             >
@@ -30,6 +34,7 @@ const Footer = () => {
       </footer>
 
       <footer
+        key={1}
         className={`lg:hidden flex justify-center ${
           isNftRoute ? "mt-80" : "mt-20"
         }`}

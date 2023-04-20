@@ -53,7 +53,7 @@ const variants = {
 const items = [
   {
     title: "QUEST",
-    icon: <Ball fill="#777786" />,
+    icon: <Ball width={"28.014"} height={"28.014"} fill="#777786" />,
     url: "/",
   },
   {

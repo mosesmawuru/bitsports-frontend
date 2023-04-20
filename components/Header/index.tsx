@@ -73,12 +73,12 @@ const Header = () => {
               <div className="flex items-center">
                 <Link href="/wallet">
                   <div className="cursor-pointer px-6 py-7 flex items-center gap-3.5 bg-primary-950 rounded-l h-12">
-                    <USDG />
+                    <USDG width="30.194" height={"35.075"} />
                     <div className="font-medium lg:text-base text-xs text-white font-Poppins">
                       33 USDG
                     </div>
                     <div className="ml-3">
-                      <QC />
+                      <QC width={"29.759"} height={"34.569"} />
                     </div>
                     <div className="font-medium flex lg:text-base text-xs text-white font-Poppins">
                       5 QC

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 interface IModal {
-  Body: React.ReactComponentElement;
+  Body: any;
   isOpen: boolean;
   close: () => void;
   isVoid?: boolean;
