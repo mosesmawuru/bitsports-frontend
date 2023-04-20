@@ -27,6 +27,8 @@ import Swap from "./swap";
 import SwapArrow from "./swap-arrow";
 import SwapIcon from "./swap-icon";
 import SwapTo from "./swap-to";
+import Copy from "./copy";
+import Refresh from "./refresh";
 
 export {
   MenuBars,
@@ -58,4 +60,6 @@ export {
   SwapArrow,
   SwapIcon,
   SwapTo,
+  Copy,
+  Refresh,
 };

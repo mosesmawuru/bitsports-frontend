@@ -9,6 +9,7 @@ import BITP from "@/public/bitp.png";
 import Footer from "@/components/Footer";
 import Modal from "@/components/Modal";
 import { useState } from "react";
+import Link from "next/link";
 
 const items = [
   {
@@ -119,18 +120,22 @@ const Wallet = () => {
                     {item.value}
                   </div>
                   <div className="relative">
-                    <button
+                    <Link
+                      href={item.type === "deposit" ? "/deposit" : "#"}
                       onClick={
                         item.type !== "deposit" ? toggleSwap : () => null
                       }
-                      className={`${
-                        item.type === "deposit"
-                          ? "bg-secondary-150"
-                          : "bg-secondary-300"
-                      } font-bold text-white ml-10 xl:ml-0 h-7 lg:h-9 px-1 lg:px-2 w-16 lg:w-24 lg:text-sm ten`}
                     >
-                      {item.type === "deposit" ? "DEPOSIT" : "SWAP"}
-                    </button>
+                      <button
+                        className={`${
+                          item.type === "deposit"
+                            ? "bg-secondary-150"
+                            : "bg-secondary-300"
+                        } font-bold text-white ml-10 xl:ml-0 h-7 lg:h-9 px-1 lg:px-2 w-16 lg:w-24 lg:text-sm ten`}
+                      >
+                        {item.type === "deposit" ? "DEPOSIT" : "SWAP"}
+                      </button>
+                    </Link>
                     <div className="xl:bg-primary-50 bg-primary-100 h-3 w-6 absolute rotate-45 -top-1.5 md:right-9 lg:right-14 xl:right-7 -right-10" />
                   </div>
                   {item.hasWithdraw && (
