@@ -139,21 +139,23 @@ const Wallet = () => {
                     <div className="xl:bg-primary-50 bg-primary-100 h-3 w-6 absolute rotate-45 -top-1.5 md:right-9 lg:right-14 xl:right-7 -right-10" />
                   </div>
                   {item.hasWithdraw && (
-                    <div className="relative">
+                    <Link href={"/withdraw"} className="relative">
                       <button
                         className={`font-bold xl:ml-10 hidden xl:block text-sm text-white border-2 border-secondary-150 h-7 lg:h-9 ten px-1 lg:px-2 w-16 lg:w-24`}
                       >
                         WITHDRAW
                       </button>
                       {/* <div className="xl:bg-primary-50 bg-primary-100 h-3 w-6 absolute rotate-45 -top-1 md:right-12 lg:right-20 xl:-right-3 -right-6" /> */}
-                    </div>
+                    </Link>
                   )}
                   {item.hasWithdraw && (
-                    <button
-                      className={`font-bold xl:hidden text-sm text-white bg-secondary-350 h-7 lg:h-9 ten px-1 lg:px-2 w-16 lg:w-24`}
-                    >
-                      WITHDRAW
-                    </button>
+                    <Link href={"/withdraw"}>
+                      <button
+                        className={`font-bold xl:hidden text-sm text-white bg-secondary-350 h-7 lg:h-9 ten px-1 lg:px-2 w-16 lg:w-24`}
+                      >
+                        WITHDRAW
+                      </button>
+                    </Link>
                   )}
                 </div>
               ))}
