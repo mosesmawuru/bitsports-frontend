@@ -1,9 +1,6 @@
-import Image from "next/image";
-import Banner from "@/public/banner2.png";
 import { Button, Header } from "@/components";
 import Pagination from "@/components/Pagination";
 import QuestComponent from "@/components/Quest";
-import { Lock } from "@/public/icons";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -34,33 +31,7 @@ export default function Home() {
             {[1, 2, 3, 4].map((item, index) => (
               <QuestComponent key={index} index={index} />
             ))}
-            <div className="hidden xl:block">
-              <Pagination />
-            </div>
-          </div>
-          <Image
-            priority={true}
-            width={465}
-            src={Banner}
-            alt="pool banner"
-            className="hidden xl:block cursor-pointer"
-            style={{ objectFit: "contain" }}
-          />
-        </div>
-        <div className="xl:hidden">
-          <Pagination />
-          <div className="mt-4">
-            <div className="flex items-center justify-center">
-              <Lock />
-            </div>
-            <Image
-              priority={true}
-              height={267}
-              src={Banner}
-              alt="pool banner"
-              className="xl:hidden cursor-pointer w-full"
-              style={{ objectFit: "cover" }}
-            />
+            <Pagination />
           </div>
         </div>
       </section>

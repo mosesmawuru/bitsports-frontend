@@ -70,26 +70,28 @@ const Header = () => {
                   <div className="text-white font-bold ten">3</div>
                 </div>
               </div>
-              <div className="flex items-center">
-                <Link href="/wallet">
-                  <div className="cursor-pointer px-6 py-7 flex items-center gap-3.5 bg-primary-950 rounded-l h-12">
-                    <USDG width="30.194" height={"35.075"} />
-                    <div className="font-medium lg:text-base text-xs text-white font-Poppins">
-                      33 USDG
+              {loggedIn && (
+                <div className="flex items-center">
+                  <Link href="/wallet">
+                    <div className="cursor-pointer px-6 py-7 flex items-center gap-3.5 bg-primary-950 rounded-l h-12">
+                      <USDG width="30.194" height={"35.075"} />
+                      <div className="font-medium lg:text-base text-xs text-white font-Poppins">
+                        33 USDG
+                      </div>
+                      <div className="ml-3">
+                        <QC width={"29.759"} height={"34.569"} />
+                      </div>
+                      <div className="font-medium flex lg:text-base text-xs text-white font-Poppins">
+                        5 QC
+                      </div>
                     </div>
-                    <div className="ml-3">
-                      <QC width={"29.759"} height={"34.569"} />
-                    </div>
-                    <div className="font-medium flex lg:text-base text-xs text-white font-Poppins">
-                      5 QC
-                    </div>
+                  </Link>
+                  <div className="cursor-pointer relative px-6 py-7 justify-center items-center bg-primary-1000 rounded-br h-12">
+                    <ArrowDown />
+                    <div className="h-9 w-9 bg-primary-200 rotate-45 -top-5 -right-7 absolute"></div>
                   </div>
-                </Link>
-                <div className="cursor-pointer relative px-6 py-7 justify-center items-center bg-primary-1000 rounded-br h-12">
-                  <ArrowDown />
-                  <div className="h-9 w-9 bg-primary-200 rotate-45 -top-5 -right-7 absolute"></div>
                 </div>
-              </div>
+              )}
             </div>
             {loggedIn ? (
               <Image
