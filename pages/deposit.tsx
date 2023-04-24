@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 
 import { Header } from "@/components";
 import Select from "@/components/Select";
@@ -7,7 +8,10 @@ import QIC from "@/public/qc.png";
 import Paypal from "@/public/paypal.png";
 import BUSD from "@/public/busd.png";
 import BITP from "@/public/bitp.png";
-import QRCode from "@/components/QrCode";
+
+const DynamicQRCode = dynamic(() => import("@/components/QrCode"), {
+  ssr: false,
+});
 import { EmptyTransaction, Refresh } from "@/public/icons";
 import classNames from "classnames";
 import { useState } from "react";
@@ -119,7 +123,7 @@ const Deposit = () => {
               )}
 
               <div className="mt-14">
-                <QRCode qrValue="0x8bcda8975c42105fd3f57b88956b511f1ff17da1" />
+                <DynamicQRCode qrValue="0x8bcda8975c42105fd3f57b88956b511f1ff17da1" />
               </div>
             </div>
           </div>
