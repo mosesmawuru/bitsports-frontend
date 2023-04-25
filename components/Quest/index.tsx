@@ -1,5 +1,8 @@
+import { motion } from "framer-motion";
+
 import { ArrowDown, Quest } from "@/public/icons";
 import Link from "next/link";
+import { useState } from "react";
 import Button, { variantTypes, volumeTypes } from "../Button";
 
 export interface IItemProp {
@@ -32,29 +35,61 @@ const quests = [
 ];
 
 const QuestComponent = (prop: IProp) => {
+  const [open, setOpen] = useState(false);
   return (
-    <div
-      className="bg-primary-400 lg:h-20 h-14 px-5 items-center flex justify-between"
-      key={prop.index}
-    >
-      <div className="h-11 w-11 rounded-full bg-white flex justify-center items-center">
-        <Quest />
+    <>
+      <div
+        className="bg-primary-400 lg:h-20 h-14 px-5 items-center flex justify-between"
+        key={prop.index}
+      >
+        <div className="h-11 w-11 rounded-full bg-white flex justify-center items-center">
+          <Quest />
+        </div>
+        {quests.map((quest, index) => (
+          <QuestItem key={index} index={index} {...quest} />
+        ))}
+        <Link href="/game">
+          <Button
+            variant={variantTypes.secondary}
+            textVol={volumeTypes.sm}
+            px="xl:px-20 px-5"
+            text="ACCEPT"
+          />
+        </Link>
+        <div
+          onClick={() => setOpen(!open)}
+          className="cursor-pointer xl:hidden self-center"
+        >
+          <ArrowDown />
+        </div>
       </div>
-      {quests.map((quest, index) => (
-        <QuestItem key={index} index={index} {...quest} />
-      ))}
-      <Link href="/game">
-        <Button
-          variant={variantTypes.secondary}
-          textVol={volumeTypes.sm}
-          px="xl:px-20 px-5"
-          text="ACCEPT"
-        />
-      </Link>
-      <div className="cursor-pointer xl:hidden self-center">
-        <ArrowDown />
-      </div>
-    </div>
+      {open && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="py-5 -mt-2 px-5 xl:hidden bg-primary-1200 text-primary-450 font-bold"
+        >
+          <div className="text-lg">CHALLENGE INFO</div>
+          <div className="mt-5 mb-3 flex items-center justify-between">
+            <div className="text-sm">
+              AMOUNT: <span className="text-white"> 10 BITP</span>
+            </div>
+            <div className="text-sm">
+              QUEST CREDIT: <span className="text-white"> 0.5</span>
+            </div>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="text-sm">
+              WIN STREAK: <span className="text-white"> 3</span>
+            </div>
+            <div className="text-sm">
+              DIFFICULTY: <span className="text-white"> HARD</span>
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </>
   );
 };
 
