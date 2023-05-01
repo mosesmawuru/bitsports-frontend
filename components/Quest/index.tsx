@@ -9,6 +9,7 @@ export interface IItemProp {
   title: string;
   content: string;
   index: number;
+  setOpen: () => void;
 }
 
 export interface IProp {
@@ -42,11 +43,19 @@ const QuestComponent = (prop: IProp) => {
         className="bg-primary-400 lg:h-20 h-14 px-5 items-center flex justify-between"
         key={prop.index}
       >
-        <div className="h-11 w-11 rounded-full bg-white flex justify-center items-center">
+        <div
+          onClick={() => setOpen(!open)}
+          className="h-11 w-11 rounded-full bg-white flex justify-center items-center"
+        >
           <Quest />
         </div>
         {quests.map((quest, index) => (
-          <QuestItem key={index} index={index} {...quest} />
+          <QuestItem
+            setOpen={() => setOpen(!open)}
+            key={index}
+            index={index}
+            {...quest}
+          />
         ))}
         <Link href="/game">
           <Button
@@ -96,6 +105,7 @@ const QuestComponent = (prop: IProp) => {
 const QuestItem = (prop: IItemProp) => {
   return (
     <div
+      onClick={() => prop.setOpen()}
       className={`flex flex-col items-center ${prop.index > 1 && "hide"}`}
       key={prop.title}
     >
