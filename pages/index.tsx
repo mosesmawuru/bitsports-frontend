@@ -13,7 +13,7 @@ export default function Home() {
     });
   };
   return (
-    <div className="w-full">
+    <div className="w-full scroll-smooth">
       <Header />
       <div className="container mx-auto px-4 lg:px-0">
         <div className="banner w-full relative mt-5 xl:mt-0">
