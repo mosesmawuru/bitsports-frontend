@@ -70,7 +70,7 @@ const Select = (props: ISelect) => {
             })}
           />
           <div className="text-white font-medium text-sm xl:text-lg">
-            {selected.name}
+            {props.name}
           </div>
         </div>
         {props.hasCopy ? (

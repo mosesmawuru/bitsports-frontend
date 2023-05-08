@@ -6,57 +6,171 @@ import QIC from "@/public/qc.png";
 import Paypal from "@/public/paypal.png";
 import BUSD from "@/public/busd.png";
 import BITP from "@/public/bitp.png";
+import CAKE from "@/public/cake.png";
 import Footer from "@/components/Footer";
 import Modal from "@/components/Modal";
-import { useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
-
-const items = [
-  {
-    icon: BUSD,
-    name: "BUSD",
-    value: "5.00",
-    type: "deposit",
-    hasWithdraw: true,
-  },
-  {
-    icon: USDT,
-    name: "USDT",
-    value: "5.00",
-    type: "deposit",
-    hasWithdraw: true,
-  },
-  {
-    icon: Paypal,
-    name: "PAYPAL",
-    value: "5.00",
-    type: "deposit",
-    hasWithdraw: true,
-  },
-  {
-    icon: BITP,
-    name: "BITP",
-    value: "50.00",
-    type: "swap",
-    hasWithdraw: false,
-  },
-  {
-    icon: QIC,
-    name: "Quest Credit",
-    value: "5.00",
-    type: "swap",
-    hasWithdraw: false,
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { IState } from "@/store";
+import Axios from "axios";
+import { SERVER_URI } from "@/config";
+import { notification } from "antd";
+import { authActions } from "@/store/auth";
+import jwtDecode from "jwt-decode";
 
 const navs = ["DEPOSIT", "WITHDRAW", "SWAP"];
 
 const Wallet = () => {
+  const { currentUser } = useSelector((state: IState) => state.auth);
+  const [cakePrice, setCakePrice] = useState<number>(0);
   const [isSwapOpen, setIsSwapOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const toggleSwap = () => {
     setIsSwapOpen(!isSwapOpen);
+    const getFromLocalStorage = (key: string) => {
+      if (!key || typeof window === "undefined" || !localStorage) {
+        return "";
+      }
+      return window.localStorage.getItem(key);
+    };
+    const token = getFromLocalStorage("token");
+    const userInfo: any = token ? jwtDecode(token) : {};
+    if (userInfo) {
+      const user = { user: userInfo.id };
+      Axios.post(`${SERVER_URI}/getUserInfo`, user).then((res) => {
+        if (res.data.success) {
+          console.log("success");
+          localStorage.setItem("token", res.data.token);
+          dispatch(authActions.setCurrentUser(jwtDecode(res.data.token)));
+        } else {
+          console.log("failed");
+        }
+      });
+    } else {
+      notification.warning({
+        message: "Warning!",
+        description: "Please login to",
+      });
+    }
   };
+  const gotoDeposit = (type: string) => {
+    localStorage.setItem("type", type);
+    window.location.href = "/deposit";
+  };
+
+  const gotoWithdraw = (type: string) => {
+    localStorage.setItem("type", type);
+    window.location.href = "/withdraw";
+  };
+
+  useEffect(() => {
+    const getFromLocalStorage = (key: string) => {
+      if (!key || typeof window === "undefined" || !localStorage) {
+        return "";
+      }
+      return window.localStorage.getItem(key);
+    };
+    const token = getFromLocalStorage("token");
+    const userInfo: any = token ? jwtDecode(token) : {};
+    if (userInfo) {
+      const user = { user: userInfo.id };
+      Axios.post(`${SERVER_URI}/getUserInfo`, user).then((res) => {
+        if (res.data.success) {
+          console.log("success");
+          localStorage.setItem("token", res.data.token);
+          dispatch(authActions.setCurrentUser(jwtDecode(res.data.token)));
+        } else {
+          console.log("failed");
+        }
+      });
+    } else {
+      notification.warning({
+        message: "Warning!",
+        description: "Please login to",
+      });
+    }
+  }, []);
+
+  const getCakePrice = async () => {
+    const cakePrice: any = await Axios.get(
+      "https://api.binance.com/api/v3/ticker/24hr?symbol=CAKEUSDT"
+    );
+    setCakePrice(cakePrice?.data?.lastPrice);
+  };
+
+  const items = useMemo(() => {
+    if (currentUser && currentUser.money) {
+      const { busd, usdt, usd, cake, bitp, quest } = currentUser.money;
+
+      return [
+        {
+          icon: BUSD,
+          name: "BUSD",
+          value: busd ? busd.toFixed(2) : 0,
+          type: "deposit",
+          hasWithdraw: true,
+        },
+        {
+          icon: USDT,
+          name: "USDT",
+          value: usdt ? usdt.toFixed(2) : 0,
+          type: "deposit",
+          hasWithdraw: true,
+        },
+        {
+          icon: CAKE,
+          name: "CAKE",
+          value: cake ? cake.toFixed(2) : 0,
+          type: "deposit",
+          hasWithdraw: true,
+        },
+        {
+          icon: Paypal,
+          name: "PAYPAL",
+          value: usd ? usd.toFixed(2) : 0,
+          type: "deposit",
+          hasWithdraw: true,
+        },
+        {
+          icon: BITP,
+          name: "BITP",
+          value: bitp ? bitp.toFixed(2) : 0,
+          type: "swap",
+          hasWithdraw: false,
+        },
+        {
+          icon: QIC,
+          name: "Quest Credit",
+          value: quest ? quest.toFixed(2) : 0,
+          type: "swap",
+          hasWithdraw: false,
+        },
+      ];
+    }
+    return [];
+  }, [currentUser]);
+
+  const calcTotal = () => {
+    if (currentUser && currentUser.money) {
+      const { busd, usdt, usd, cake, bitp, quest } = currentUser.money;
+      return (
+        (busd ?? 0) +
+        (usdt ?? 0) +
+        (usd ?? 0) +
+        (cake * cakePrice ?? 0) +
+        (bitp * 0.06 ?? 0) +
+        (quest * 3 ?? 0)
+      );
+    }
+    return 0;
+  };
+
+  useEffect(() => {
+    getCakePrice();
+  }, []);
+
   return (
     <div className="w-full">
       <Header />
@@ -70,7 +184,10 @@ const Wallet = () => {
                   TOTAL BALANCE
                 </div>
                 <div className="text-base mt-2 lg:text-xl font-bold text-white text-right">
-                  USDG <span className="text-base lg:text-2xl">33.00</span>
+                  USDG{" "}
+                  <span className="text-base lg:text-2xl">
+                    {calcTotal().toFixed(2)}
+                  </span>
                 </div>
               </div>
             </div>
@@ -81,7 +198,7 @@ const Wallet = () => {
                   QUEST CREDIT
                 </div>
                 <div className="text-base mt-2 lg:text-2xl font-bold text-white text-right">
-                  5.00
+                  {currentUser && currentUser.money && currentUser.money.quest}
                 </div>
               </div>
             </div>
@@ -120,33 +237,29 @@ const Wallet = () => {
                     {item.value}
                   </div>
                   <div className="relative">
-                    <Link
-                      href={item.type === "deposit" ? "/deposit" : "#"}
+                    <button
+                      className={`${
+                        item.type === "deposit"
+                          ? "bg-secondary-150"
+                          : "bg-secondary-300"
+                      } font-bold text-white ml-10 xl:ml-0 h-7 lg:h-9 px-1 lg:px-2 w-16 lg:w-24 lg:text-sm ten`}
                       onClick={
-                        item.type !== "deposit" ? toggleSwap : () => null
+                        item.type !== "deposit"
+                          ? toggleSwap
+                          : () => gotoDeposit(item.name)
                       }
                     >
-                      <button
-                        className={`${
-                          item.type === "deposit"
-                            ? "bg-secondary-150"
-                            : "bg-secondary-300"
-                        } font-bold text-white ml-10 xl:ml-0 h-7 lg:h-9 px-1 lg:px-2 w-16 lg:w-24 lg:text-sm ten`}
-                      >
-                        {item.type === "deposit" ? "DEPOSIT" : "SWAP"}
-                      </button>
-                    </Link>
+                      {item.type === "deposit" ? "DEPOSIT" : "SWAP"}
+                    </button>
                     <div className="xl:bg-primary-50 bg-primary-100 h-3 w-6 absolute rotate-45 -top-1.5 md:right-9 lg:right-14 xl:right-7 -right-10" />
                   </div>
                   {item.hasWithdraw && (
-                    <Link href={"/withdraw"} className="relative">
-                      <button
-                        className={`font-bold xl:ml-10 hidden xl:block text-sm text-white border-2 border-secondary-150 h-7 lg:h-9 ten px-1 lg:px-2 w-16 lg:w-24`}
-                      >
-                        WITHDRAW
-                      </button>
-                      {/* <div className="xl:bg-primary-50 bg-primary-100 h-3 w-6 absolute rotate-45 -top-1 md:right-12 lg:right-20 xl:-right-3 -right-6" /> */}
-                    </Link>
+                    <button
+                      className={`font-bold xl:ml-10 hidden xl:block text-sm text-white border-2 border-secondary-150 h-7 lg:h-9 ten px-1 lg:px-2 w-16 lg:w-24`}
+                      onClick={() => gotoWithdraw(item.name)}
+                    >
+                      WITHDRAW
+                    </button>
                   )}
                   {item.hasWithdraw && (
                     <Link href={"/withdraw"}>
@@ -189,7 +302,7 @@ const Wallet = () => {
         Body={Swap}
         isOpen={isSwapOpen}
         close={toggleSwap}
-        isVoid
+        isVoid={5}
       />
       <Footer />
     </div>

@@ -1,19 +1,22 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { Button, Header } from "@/components";
 import Pagination from "@/components/Pagination";
 import QuestComponent from "@/components/Quest";
 import Footer from "@/components/Footer";
-import Link from "next/link";
+import { SERVER_URI } from '@/config';
 
 export default function Home() {
-  const scroll = () => {
-    window.scrollBy({
-      top: 10000, // could be negative value
-      left: 0,
-      behavior: "smooth",
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${SERVER_URI}/challenge/index`).then(res => {
+      setData(res.data.models);
     });
-  };
+  }, []);
+
   return (
-    <div className="w-full scroll-smooth">
+    <div className="w-full">
       <Header />
       <div className="container mx-auto px-4 lg:px-0">
         <div className="banner w-full relative mt-5 xl:mt-0">
@@ -22,9 +25,7 @@ export default function Home() {
             <h2 className="text-white mb-4 font-bold text-xl px-8 pt-4 xl:pt-0 xl:px-0 xl:text-6xl xl:text-4xl text-center font-Poppins">
               WORLD FIRST PLAY-TO-EARN POOL GAME
             </h2>
-            <Link href="#quest">
-              <Button onClick={scroll} px="px-4" text="Test2Earn" />
-            </Link>
+            <Button px="px-4" text="Play Bit Pool Web" />
           </div>
         </div>
       </div>
@@ -36,13 +37,10 @@ export default function Home() {
           and other Crypto
         </p>
 
-        <div
-          id="quest"
-          className="mt-5 xl:gap-11 flex w-full flex-col xl:flex-row  items-start justify-between"
-        >
+        <div className="mt-5 xl:gap-11 flex w-full flex-col xl:flex-row  items-start justify-between">
           <div className="flex w-full flex-col gap-2">
-            {[1, 2, 3, 4].map((item, index) => (
-              <QuestComponent key={index} index={index} />
+            {data.filter((p: any) => p.status < 2).map((item, index) => (
+              <QuestComponent key={index} quest={item} index={index} />
             ))}
             <Pagination />
           </div>

@@ -1,3 +1,4 @@
+import jwtDecode from "jwt-decode";
 import {
   ArrowDown,
   Bell,
@@ -12,19 +13,64 @@ import PoolLogo from "@/public/pool-logo.png";
 import Profile from "@/public/profile.png";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Button, { variantTypes } from "../Button";
 import Login from "../Login";
 import Modal from "../Modal";
 import { MobileNav } from "../Nav";
 import Signup from "../Signup";
+import { IState } from "@/store";
+import { authActions } from "@/store/auth";
+import Axios from "axios";
 
 const Header = () => {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const { currentUser } = useSelector((state: IState) => state.auth);
   const [isOpenLogin, setIsOpenLogin] = useState(false);
   const [isOpenSignup, setIsOpenSignup] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isChallengeOpen, setIsChallengeOpen] = useState(false);
+  const [cakePrice, setCakePrice] = useState<number>(0);
+
+  const dispatch = useDispatch();
+
+  const getCakePrice = async () => {
+    const cakePrice: any = await Axios.get(
+      "https://api.binance.com/api/v3/ticker/24hr?symbol=CAKEUSDT"
+    );
+    setCakePrice(cakePrice?.data?.lastPrice);
+  };
+
+  const calcTotal = () => {
+    if (currentUser && currentUser.money) {
+      const { busd, usdt, usd, cake, bitp, quest } = currentUser.money;
+      return (
+        (busd ?? 0) +
+        (usdt ?? 0) +
+        (usd ?? 0) +
+        (cake * cakePrice ?? 0) +
+        (bitp * 0.06 ?? 0) +
+        (quest * 3 ?? 0)
+      );
+    }
+    return 0;
+  };
+
+  useEffect(() => {
+    getCakePrice();
+  }, []);
+
+  useEffect(() => {
+    const getFromLocalStorage = (key: string) => {
+      if (!key || typeof window === "undefined" || !localStorage) {
+        return "";
+      }
+      return window.localStorage.getItem(key);
+    };
+
+    const token = getFromLocalStorage("token");
+    dispatch(authActions.setCurrentUser(token ? jwtDecode(token) : {}));
+  }, []);
 
   const toggleLogin = () => {
     setIsOpenSignup(false);
@@ -70,19 +116,22 @@ const Header = () => {
                   <div className="text-white font-bold ten">3</div>
                 </div>
               </div>
-              {loggedIn && (
+              {currentUser && currentUser.email && (
                 <div className="flex items-center">
                   <Link href="/wallet">
                     <div className="cursor-pointer px-6 py-7 flex items-center gap-3.5 bg-primary-950 rounded-l h-12">
                       <USDG width="30.194" height={"35.075"} />
                       <div className="font-medium lg:text-base text-xs text-white font-Poppins">
-                        33 USDG
+                        {calcTotal().toFixed(2)} USDG
                       </div>
                       <div className="ml-3">
                         <QC width={"29.759"} height={"34.569"} />
                       </div>
                       <div className="font-medium flex lg:text-base text-xs text-white font-Poppins">
-                        5 QC
+                        {currentUser &&
+                          currentUser.money &&
+                          currentUser.money.quest}{" "}
+                        QC
                       </div>
                     </div>
                   </Link>
@@ -93,7 +142,7 @@ const Header = () => {
                 </div>
               )}
             </div>
-            {loggedIn ? (
+            {currentUser && currentUser.email ? (
               <Image
                 priority={true}
                 height={75}
@@ -136,7 +185,7 @@ const Header = () => {
               </div>
             </div>
           </div>
-          {loggedIn ? (
+          {currentUser && currentUser.email ? (
             <div className="flex items-center">
               <Link href="/wallet">
                 <div className="cursor-pointe px-2 py-3 flex items-center gap-3 bg-primary-950 h-8 rounded-l">
@@ -159,14 +208,26 @@ const Header = () => {
         </header>
       </div>
       <MobileNav open={isNavOpen} close={toggleNav} />
-      <Modal key={0} Body={Login} isOpen={isOpenLogin} close={toggleLogin} />
-      <Modal key={1} Body={Signup} isOpen={isOpenSignup} close={toggleSignup} />
+      <Modal
+        key={0}
+        Body={Login}
+        isOpen={isOpenLogin}
+        close={toggleLogin}
+        isVoid={1}
+      />
+      <Modal
+        key={1}
+        Body={Signup}
+        isOpen={isOpenSignup}
+        close={toggleSignup}
+        isVoid={2}
+      />
       <Modal
         key={2}
         Body={NoChallenge}
         isOpen={isChallengeOpen}
         close={toggleChallenge}
-        isVoid
+        isVoid={3}
       />
     </>
   );

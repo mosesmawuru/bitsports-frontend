@@ -101,7 +101,6 @@ body {
   padding: 0;
   box-sizing: border-box;
   background-color: black;
-  scroll-behavior: smooth;
 }
 
 .small-border-b {
@@ -241,7 +240,7 @@ body {
   }
 
   .banner {
-    background-image: url("/Hotspot.jpg");
+    background-image: url("/Hotpot.png");
     height: 168px;
   }
 
@@ -315,4 +314,56 @@ body {
     width: 20px;
     height: 20px;
   }
+}
+
+.ant-table .ant-table-content {
+  margin-top: 20px;
+}
+
+.ant-table .ant-table-content .ant-table-thead .ant-table-cell {
+  background-color: #333;
+  color: #fff;
+}
+
+.ant-table .ant-table-content .ant-table-tbody .ant-table-cell {
+  background-color: #333;
+  color: #fff;
+}
+
+.ant-table .ant-table-content .ant-table-tbody .ant-table-cell-row-hover {
+  background-color: #ccc;
+  color: #000;
+}
+
+.ant-table-pagination-right > .ant-pagination-prev,
+.ant-table-pagination-right > .ant-pagination-item,
+.ant-table-pagination-right > .ant-pagination-next {
+  background-color: #333;
+}
+
+.ant-table-pagination-right > .ant-pagination-prev > .ant-pagination-item-link,
+.ant-table-pagination-right > .ant-pagination-item > a,
+.ant-table-pagination-right > .ant-pagination-next > .ant-pagination-item-link {
+  color: #fff;
+  border: #fff 1px solid;
+  border-radius: 3px;
+}
+
+.ant-table-pagination-right > .ant-pagination-prev > .ant-pagination-item-link:hover,
+.ant-table-pagination-right > .ant-pagination-item > a:hover,
+.ant-table-pagination-right > .ant-pagination-next > .ant-pagination-item-link:hover {
+  color: #aaa;
+}
+
+::-webkit-scrollbar {
+ width: 8px;
+ height: 8px;
+ background-color: #f1f1f2;
+ border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  height: 8px;
+  background-color: #888;
+  border-radius: 5px;
 }
