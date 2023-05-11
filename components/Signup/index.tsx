@@ -13,7 +13,8 @@ import { Check } from "@/public/icons";
 import Logo from "@/public/logo2.svg";
 import Input from "../Input";
 import { SERVER_URI } from "@/config";
-import { authActions } from "@/store/auth";
+import { authActions } from '@/store/auth';
+import Cookie from 'js-cookie';
 
 const schema = yup.object().shape({
   email: yup.string().email("Email is Invalid").required("Email is required"),
@@ -42,6 +43,7 @@ const Signup = () => {
           description: "You're registered successfully!",
         });
         localStorage.setItem("token", res.data.token);
+        Cookie.set('uid', res.data.uid, {expires: 60*24*30});
         dispatch(authActions.setCurrentUser(jwtDecode(res.data.token)));
         reset();
       } else {
