@@ -23,7 +23,7 @@ const schema = yup.object().shape({
   username: yup.string().required("User name is required"),
 });
 
-const Signup = ({ close }: { close: () => void }) => {
+const Signup = (props: any) => {
   const {
     register,
     handleSubmit,
@@ -43,8 +43,8 @@ const Signup = ({ close }: { close: () => void }) => {
         });
         localStorage.setItem("token", res.data.token);
         dispatch(authActions.setCurrentUser(jwtDecode(res.data.token)));
+        props.close();
         reset();
-        close();
       } else {
         notification.warning({
           message: "Error!",

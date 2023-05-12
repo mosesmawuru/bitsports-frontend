@@ -22,6 +22,7 @@ import { MobileNav } from "../Nav";
 import Signup from "../Signup";
 import { IState } from "@/store";
 import { authActions } from "@/store/auth";
+import { SERVER_URI } from "@/config";
 import Axios from "axios";
 import { useRouter } from "next/router";
 
@@ -59,6 +60,23 @@ const Header = () => {
     return 0;
   };
 
+  useEffect(() => {
+    const getFromLocalStorage = (key: string) => {
+      if (!key || typeof window === "undefined" || !localStorage) {
+        return "";
+      }
+      return window.localStorage.getItem(key);
+    };
+
+    const token = getFromLocalStorage("token");
+    dispatch(authActions.setCurrentUser(token ? jwtDecode(token) : {}));
+    getCakePrice();
+    const user: any = token ? jwtDecode(token) : null;
+    Axios.post(`${SERVER_URI}/getUserInfo`, { user: user?.id }).then(res => {
+      localStorage.setItem('token', res.data.token);
+    })
+  }, []);
+
   const toggleLogin = () => {
     setIsOpenSignup(false);
     setIsOpenLogin(!isOpenLogin);
@@ -73,40 +91,11 @@ const Header = () => {
   const toggleChallenge = () => {
     setIsChallengeOpen(!isChallengeOpen);
   };
-
   const logout = () => {
     localStorage.removeItem("token");
     dispatch(authActions.setCurrentUser({}));
     router.push("/");
   };
-
-  useEffect(() => {
-    getCakePrice();
-  }, []);
-
-  useEffect(() => {
-    const getFromLocalStorage = (key: string) => {
-      if (!key || typeof window === "undefined" || !localStorage) {
-        return "";
-      }
-      return window.localStorage.getItem(key);
-    };
-
-    const token = getFromLocalStorage("token");
-    dispatch(authActions.setCurrentUser(token ? jwtDecode(token) : {}));
-  }, []);
-
-  useEffect(() => {
-    const getFromLocalStorage = (key: string) => {
-      if (!key || typeof window === "undefined" || !localStorage) {
-        return "";
-      }
-      return window.localStorage.getItem(key);
-    };
-
-    const token = getFromLocalStorage("token");
-    dispatch(authActions.setCurrentUser(token ? jwtDecode(token) : {}));
-  }, []);
   return (
     <>
       <div className="bg-primary-200 small-border-b xl:border-b-primary-150 border-b-black">
@@ -149,9 +138,7 @@ const Header = () => {
                         <QC width={"29.759"} height={"34.569"} />
                       </div>
                       <div className="font-medium flex lg:text-base text-xs text-white font-Poppins">
-                        {currentUser &&
-                          currentUser.money &&
-                          currentUser.money.quest}{" "}
+                        {currentUser && currentUser.money && currentUser.money.quest}{" "}
                         QC
                       </div>
                     </div>
