@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Header, Swap } from "@/components";
 import { EmptyTransaction, Filter, QC, USDG } from "@/public/icons";
 import Image from "next/image";
@@ -10,7 +11,6 @@ import CAKE from "@/public/cake.png";
 import Footer from "@/components/Footer";
 import Modal from "@/components/Modal";
 import { useEffect, useState, useMemo } from "react";
-import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { IState } from "@/store";
 import Axios from "axios";
@@ -78,11 +78,8 @@ const Wallet = () => {
       const user = { user: userInfo.id };
       Axios.post(`${SERVER_URI}/getUserInfo`, user).then((res) => {
         if (res.data.success) {
-          console.log("success");
           localStorage.setItem("token", res.data.token);
           dispatch(authActions.setCurrentUser(jwtDecode(res.data.token)));
-        } else {
-          console.log("failed");
         }
       });
     } else {
@@ -94,11 +91,10 @@ const Wallet = () => {
   }, []);
 
   const getCakePrice = async () => {
-    // const cakePrice: any = await Axios.get(
-    //   "https://api.binance.com/api/v3/ticker/24hr?symbol=CAKEUSDT"
-    // );
-    // setCakePrice(cakePrice?.data?.lastPrice);
-    setCakePrice(2);
+    const cakePrice: any = await Axios.get(
+      "https://api.binance.com/api/v3/ticker/24hr?symbol=CAKEUSDT"
+    );
+    setCakePrice(cakePrice?.data?.lastPrice);
   };
 
   const items = useMemo(() => {

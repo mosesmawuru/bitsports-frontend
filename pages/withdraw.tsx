@@ -172,9 +172,7 @@ const Withdraw = () => {
                   <motion.input
                     type="text"
                     className="rounded w-full font-medium text-lg text-white px-5 xl:px-8 h-16 bg-secondary-400 outline-none"
-                    onChangeCapture={(e: any) =>
-                      setWithdrawalAddress(e.target.value)
-                    }
+                    onClick={(e: any) => setWithdrawalAddress(e.target.value)}
                   />
 
                   <p className="font-medium mb-7 text-sm mt-2.5 text-white">
@@ -200,7 +198,7 @@ const Withdraw = () => {
                   <motion.input
                     type="number"
                     className="rounded w-full font-medium text-lg text-white px-5 xl:px-8 h-16 bg-secondary-400 outline-none"
-                    onChangeCapture={(e: any) => setAmount(e.target.value)}
+                    onClick={(e: any) => setAmount(e.target.value)}
                   />
                 </motion.div>
               )}
@@ -255,28 +253,29 @@ const Withdraw = () => {
                 <h3 className="xl:text-2xl whitespace-nowrap text-lg font-bold text-white text-left">
                   TRANSACTION HISTORY
                 </h3>
-                <div className="flex items-center gap-32 mt-6">
-                  <div className="grid grid-cols-4 items-center gap-20 xl:gap-28">
-                    {history.length && (
-                      <Table
-                        size="middle"
-                        rowKey="_id"
-                        dataSource={history}
-                        pagination={false}
-                        columns={[
-                          { title: "COIN", dataIndex: "coin" },
-                          { title: "AMOUNT", dataIndex: "amount" },
-                          { title: "ADDRESS", dataIndex: "address" },
-                          {
-                            title: "TIME",
-                            dataIndex: "date",
-                            render: (text, record) =>
-                              moment(text).format("YYYY-MM-DD"),
-                          },
-                        ]}
-                      />
-                    )}
-                  </div>
+                <div className="grid mt-6 grid-cols-4 items-center gap-20 xl:gap-32">
+                  {history.length && (
+                    <Table
+                      size="middle"
+                      rowKey="_id"
+                      dataSource={history}
+                      pagination={false}
+                      columns={[
+                        { title: "COIN", dataIndex: "coin" },
+                        { title: "AMOUNT", dataIndex: "amount" },
+                        { title: "ADDRESS", dataIndex: "address" },
+                        {
+                          title: "TIME",
+                          dataIndex: "date",
+                          render: (text, record) =>
+                            moment(text).format("YYYY-MM-DD"),
+                        },
+                      ]}
+                    />
+                  )}
+                </div>
+                <div className="mt-20 xl:ml-28 flex w-full justify-center">
+                  <EmptyTransaction />
                 </div>
                 {!history.length && (
                   <div className="mt-20 flex w-full justify-center">

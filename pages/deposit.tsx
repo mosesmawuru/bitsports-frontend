@@ -78,16 +78,12 @@ const Deposit = () => {
     console.log("currentUser", currentUser);
     if (currentUser) {
       const payload = { network, coin, user: currentUser.id };
-      console.log(payload);
       Axios.post(`${SERVER_URI}/deposit`, payload).then((res) => {
-        console.log(res);
         if (res.data.success) {
-          console.log("success");
           localStorage.setItem("token", res.data.token);
           dispatch(authActions.setCurrentUser(jwtDecode(res.data.token)));
           setHistory(res.data.model);
         } else {
-          console.log("failed");
           setHistory([]);
         }
       });

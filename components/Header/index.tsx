@@ -13,7 +13,7 @@ import PoolLogo from "@/public/pool-logo.png";
 import Profile from "@/public/profile.png";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Button, { variantTypes } from "../Button";
 import Login from "../Login";
@@ -35,11 +35,10 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const getCakePrice = async () => {
-    // const cakePrice: any = await Axios.get(
-    //   "https://api.binance.com/api/v3/ticker/24hr?symbol=CAKEUSDT"
-    // );
-    // setCakePrice(cakePrice?.data?.lastPrice);
-    setCakePrice(2);
+    const cakePrice: any = await Axios.get(
+      "https://api.binance.com/api/v3/ticker/24hr?symbol=CAKEUSDT"
+    );
+    setCakePrice(cakePrice?.data?.lastPrice);
   };
 
   const calcTotal = () => {
@@ -59,6 +58,18 @@ const Header = () => {
 
   useEffect(() => {
     getCakePrice();
+  }, []);
+
+  useEffect(() => {
+    const getFromLocalStorage = (key: string) => {
+      if (!key || typeof window === "undefined" || !localStorage) {
+        return "";
+      }
+      return window.localStorage.getItem(key);
+    };
+
+    const token = getFromLocalStorage("token");
+    dispatch(authActions.setCurrentUser(token ? jwtDecode(token) : {}));
   }, []);
 
   useEffect(() => {

@@ -32,20 +32,21 @@ const QuestComponent = (prop: IProp) => {
   const router = useRouter()
   const [open, setOpen] = useState(false);
   const {currentUser} = useSelector((state: IState) => state.auth);
-
+  
   const startGame = () => {
-    if(currentUser) {
-      Axios.post(`${SERVER_URI}/game/start`, { cid: prop.quest._id, uid: Cookie.get('uid') }).then(res => {
-        if(res.data.success) {
-          localStorage.setItem('cid', prop.quest._id);
-          router.push('/game');
-        } else {
-          notification.warning({ message: 'Warning!', description: res.data.message });
-        }
-      })
-    } else {
+    if(!currentUser) {
       notification.warning({ message: 'Warning!', description: 'Please login!' });
+      return;
     }
+
+    Axios.post(`${SERVER_URI}/game/start`, { cid: prop.quest._id, uid: currentUser.id }).then(res => {
+      if(res.data.success) {
+        localStorage.setItem('cid', prop.quest._id);
+        router.push('/game');
+      } else {
+        notification.warning({ message: 'Warning!', description: res.data.message });
+      }
+    });
   }
 
   return <>
