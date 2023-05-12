@@ -22,6 +22,10 @@ import Button, { variantTypes } from "../Button";
 import { useEffect, useState } from "react";
 import Modal from "../Modal";
 import { NoChallenge } from "../Header";
+import { useDispatch, useSelector } from "react-redux";
+import { IState } from "@/store";
+import { useRouter } from "next/router";
+import { authActions } from "@/store/auth";
 
 const itemVariants: Variants = {
   open: {
@@ -130,17 +134,16 @@ const DesktopNav = () => {
           </motion.div>
         ))}
       </motion.div>
-
-      <div className="mt-20">
-        <Contact />
-      </div>
     </motion.nav>
   );
 };
 
 const MobileNav = ({ open, close }: { open: boolean; close: () => void }) => {
+  const { currentUser } = useSelector((state: IState) => state.auth);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const [isOpen, setIsOpen] = useState(open);
-  const [loggedIn, setLoggedIn] = useState(true);
   const [isChallengeOpen, setIsChallengeOpen] = useState(false);
 
   const handleClose = () => {
@@ -152,6 +155,12 @@ const MobileNav = ({ open, close }: { open: boolean; close: () => void }) => {
 
   const toggleChallenge = () => {
     setIsChallengeOpen(!isChallengeOpen);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    dispatch(authActions.setCurrentUser({}));
+    router.push("/");
   };
 
   useEffect(() => {
@@ -195,7 +204,7 @@ const MobileNav = ({ open, close }: { open: boolean; close: () => void }) => {
             </motion.div>
           </div>
           <div className="mt-10 flex flex-col justify-center items-center gap-5">
-            {loggedIn && (
+            {currentUser && currentUser?.email && (
               <div className="flex flex-col justify-center items-center">
                 <Image
                   priority={true}
@@ -208,6 +217,12 @@ const MobileNav = ({ open, close }: { open: boolean; close: () => void }) => {
                 <h4 className="text-center font-bold text-lg text-primary-450 mt-2">
                   BITSPORT_ADMIN
                 </h4>
+                <div
+                  onClick={logout}
+                  className="text-white font-bold cursor-pointer mt-2"
+                >
+                  Logout
+                </div>
               </div>
             )}
             <Button
@@ -276,7 +291,7 @@ const MobileNav = ({ open, close }: { open: boolean; close: () => void }) => {
 
       <Modal
         key={2}
-        Body={NoChallenge}
+        Body={<NoChallenge />}
         isOpen={isChallengeOpen}
         close={toggleChallenge}
         isVoid={0}

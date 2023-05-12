@@ -23,6 +23,7 @@ import Signup from "../Signup";
 import { IState } from "@/store";
 import { authActions } from "@/store/auth";
 import Axios from "axios";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const { currentUser } = useSelector((state: IState) => state.auth);
@@ -33,6 +34,7 @@ const Header = () => {
   const [cakePrice, setCakePrice] = useState<number>(0);
 
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const getCakePrice = async () => {
     const cakePrice: any = await Axios.get(
@@ -54,6 +56,27 @@ const Header = () => {
       );
     }
     return 0;
+  };
+
+  const toggleLogin = () => {
+    setIsOpenSignup(false);
+    setIsOpenLogin(!isOpenLogin);
+  };
+  const toggleSignup = () => {
+    setIsOpenLogin(false);
+    setIsOpenSignup(!isOpenSignup);
+  };
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+  const toggleChallenge = () => {
+    setIsChallengeOpen(!isChallengeOpen);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    dispatch(authActions.setCurrentUser({}));
+    router.push("/");
   };
 
   useEffect(() => {
@@ -83,21 +106,6 @@ const Header = () => {
     const token = getFromLocalStorage("token");
     dispatch(authActions.setCurrentUser(token ? jwtDecode(token) : {}));
   }, []);
-
-  const toggleLogin = () => {
-    setIsOpenSignup(false);
-    setIsOpenLogin(!isOpenLogin);
-  };
-  const toggleSignup = () => {
-    setIsOpenLogin(false);
-    setIsOpenSignup(!isOpenSignup);
-  };
-  const toggleNav = () => {
-    setIsNavOpen(!isNavOpen);
-  };
-  const toggleChallenge = () => {
-    setIsChallengeOpen(!isChallengeOpen);
-  };
   return (
     <>
       <div className="bg-primary-200 small-border-b xl:border-b-primary-150 border-b-black">
@@ -155,14 +163,22 @@ const Header = () => {
               )}
             </div>
             {currentUser && currentUser.email ? (
-              <Image
-                priority={true}
-                height={75}
-                width={79}
-                src={Profile}
-                alt="profile"
-                className="cursor-pointer"
-              />
+              <div className="flex items-center justify-end gap-4">
+                <Image
+                  priority={true}
+                  height={75}
+                  width={79}
+                  src={Profile}
+                  alt="profile"
+                  className="cursor-pointer"
+                />
+                <div
+                  onClick={logout}
+                  className="text-white font-bold cursor-pointer"
+                >
+                  Logout
+                </div>
+              </div>
             ) : (
               <div className="flex items-center gap-4">
                 <Button onClick={toggleSignup} px="px-7" text="SIGN UP" />
@@ -211,6 +227,12 @@ const Header = () => {
                 <ArrowDown />
                 <div className="h-4 w-4 bg-primary-50 rotate-45 -top-2 -right-2.5 absolute"></div>
               </div>
+              <div
+                onClick={logout}
+                className="text-white font-bold cursor-pointer"
+              >
+                Logout
+              </div>
             </div>
           ) : (
             <div className="flex items-center gap-4">
@@ -222,21 +244,21 @@ const Header = () => {
       <MobileNav open={isNavOpen} close={toggleNav} />
       <Modal
         key={0}
-        Body={Login}
+        Body={<Login close={toggleLogin} />}
         isOpen={isOpenLogin}
         close={toggleLogin}
         isVoid={1}
       />
       <Modal
         key={1}
-        Body={Signup}
+        Body={<Signup close={toggleSignup} />}
         isOpen={isOpenSignup}
         close={toggleSignup}
         isVoid={2}
       />
       <Modal
         key={2}
-        Body={NoChallenge}
+        Body={<NoChallenge />}
         isOpen={isChallengeOpen}
         close={toggleChallenge}
         isVoid={3}

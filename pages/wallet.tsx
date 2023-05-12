@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 import { Header, Swap } from "@/components";
 import { EmptyTransaction, Filter, QC, USDG } from "@/public/icons";
 import Image from "next/image";
@@ -296,7 +296,7 @@ const Wallet = () => {
       </div>
       <Modal
         key={0}
-        Body={Swap}
+        Body={<Swap />}
         isOpen={isSwapOpen}
         close={toggleSwap}
         isVoid={5}
