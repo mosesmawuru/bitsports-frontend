@@ -40,11 +40,11 @@ const Select = (props: ISelect) => {
   };
 
   useEffect(() => {
-    setSelected({
-      icon: props.icon,
-      name: props.name,
-    });
-  }, [props]);
+      setSelected({
+        icon: props.icon,
+        name: props.name,
+      });
+  }, []);
   return (
     <div className="relative w-full mb-7">
       <div
