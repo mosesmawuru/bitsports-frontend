@@ -75,7 +75,6 @@ const Deposit = () => {
   const dispatch = useDispatch();
 
   const getTransaction = () => {
-    console.log("currentUser", currentUser);
     if (currentUser) {
       const payload = { network, coin, user: currentUser.id };
       Axios.post(`${SERVER_URI}/deposit`, payload).then((res) => {
