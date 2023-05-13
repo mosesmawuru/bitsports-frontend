@@ -1,16 +1,17 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Button, Header } from "@/components";
 import Pagination from "@/components/Pagination";
 import QuestComponent from "@/components/Quest";
 import Footer from "@/components/Footer";
-import { SERVER_URI } from '@/config';
+import { SERVER_URI } from "@/config";
+import Cookies from "js-cookie";
 
 export default function Home() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get(`${SERVER_URI}/challenge/index`).then(res => {
+    axios.get(`${SERVER_URI}/challenge/index`).then((res) => {
       setData(res.data.models);
     });
   }, []);
@@ -39,9 +40,11 @@ export default function Home() {
 
         <div className="mt-5 xl:gap-11 flex w-full flex-col xl:flex-row  items-start justify-between">
           <div className="flex w-full flex-col gap-2">
-            {data.filter((p: any) => p.status < 2).map((item, index) => (
-              <QuestComponent key={index} quest={item} index={index} />
-            ))}
+            {data
+              .filter((p: any) => p.status < 2)
+              .map((item, index) => (
+                <QuestComponent key={index} quest={item} index={index} />
+              ))}
             <Pagination />
           </div>
         </div>

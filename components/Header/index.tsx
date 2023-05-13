@@ -79,6 +79,16 @@ const Header = () => {
     router.push("/");
   };
 
+  const clickLoginRoute = () => {
+    toggleSignup();
+    toggleLogin();
+  };
+
+  const clickSignupRoute = () => {
+    toggleLogin();
+    toggleSignup();
+  };
+
   useEffect(() => {
     getCakePrice();
   }, []);
@@ -229,7 +239,7 @@ const Header = () => {
               </div>
               <div
                 onClick={logout}
-                className="text-white font-bold cursor-pointer"
+                className="text-white hidden md:block md:ml-7 font-bold cursor-pointer"
               >
                 Logout
               </div>
@@ -244,14 +254,14 @@ const Header = () => {
       <MobileNav open={isNavOpen} close={toggleNav} />
       <Modal
         key={0}
-        Body={<Login close={toggleLogin} />}
+        Body={<Login switch={clickSignupRoute} close={toggleLogin} />}
         isOpen={isOpenLogin}
         close={toggleLogin}
         isVoid={1}
       />
       <Modal
         key={1}
-        Body={<Signup close={toggleSignup} />}
+        Body={<Signup switch={clickLoginRoute} close={toggleSignup} />}
         isOpen={isOpenSignup}
         close={toggleSignup}
         isVoid={2}

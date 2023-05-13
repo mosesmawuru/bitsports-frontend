@@ -14,6 +14,7 @@ import Logo from "@/public/logo2.svg";
 import Input from "../Input";
 import { SERVER_URI } from "@/config";
 import { authActions } from "@/store/auth";
+import Cookies from "js-cookie";
 
 const schema = yup.object().shape({
   email: yup.string().email("Email is Invalid").required("Email is required"),
@@ -23,7 +24,7 @@ const schema = yup.object().shape({
   username: yup.string().required("User name is required"),
 });
 
-const Signup = ({ close }: { close: () => void }) => {
+const Signup = (props: { close: () => void; switch: () => void }) => {
   const {
     register,
     handleSubmit,
@@ -42,9 +43,10 @@ const Signup = ({ close }: { close: () => void }) => {
           description: "You're registered successfully!",
         });
         localStorage.setItem("token", res.data.token);
+        Cookies.set("uid", res.data.uid, { expires: 60 * 24 * 30 });
         dispatch(authActions.setCurrentUser(jwtDecode(res.data.token)));
         reset();
-        close();
+        props.close();
       } else {
         notification.warning({
           message: "Error!",
@@ -131,10 +133,13 @@ const Signup = ({ close }: { close: () => void }) => {
       </form>
 
       <div className="lg:mt-24 mt-14 flex flex-col justify-center items-center lg:gap-10 gap-16">
-        <Link href="#" className="font-medium text-lg text-white">
+        <div
+          onClick={props.switch}
+          className="font-medium text-lg text-white cursor-pointer"
+        >
           Already have an account ?{" "}
-          <span className="text-secondary-100">Sign Up</span>
-        </Link>
+          <span className="text-secondary-100">Sign In</span>
+        </div>
 
         <div className="flex flex-col justify-center items-center gap-2">
           <div className="lg:text-xl text-base text-white font-light">
