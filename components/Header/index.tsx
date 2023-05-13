@@ -236,7 +236,7 @@ const Header = () => {
                 <div className="cursor-pointe px-2 py-3 flex items-center gap-3 bg-primary-950 h-8 rounded-l">
                   <USDG width={17} height={19.75} />
                   <div className="font-medium lg:text-base ten text-white font-Poppins">
-                    33
+                    {calcTotal().toFixed(2)}
                   </div>
                 </div>
               </Link>

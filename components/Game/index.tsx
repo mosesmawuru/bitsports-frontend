@@ -51,7 +51,7 @@ export default function GameComponent() {
   }, [currentUser]);
 
   return (
-    <div className="w-full">
+    <div className="w-full absolute xl:relative top-0 left-0 h-full">
       <Header />
 
       <div className="min-h-90vh w-full bg-white relative">

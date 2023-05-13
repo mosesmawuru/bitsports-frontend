@@ -145,6 +145,7 @@ const MobileNav = ({ open, close }: { open: boolean; close: () => void }) => {
 
   const [isOpen, setIsOpen] = useState(open);
   const [isChallengeOpen, setIsChallengeOpen] = useState(false);
+  const [cakePrice, setCakePrice] = useState<number>(0);
 
   const handleClose = () => {
     setIsOpen(!isOpen);
@@ -162,6 +163,33 @@ const MobileNav = ({ open, close }: { open: boolean; close: () => void }) => {
     dispatch(authActions.setCurrentUser({}));
     router.push("/");
   };
+
+  const getCakePrice = async () => {
+    // const cakePrice: any = await Axios.get(
+    //   "https://api.binance.com/api/v3/ticker/24hr?symbol=CAKEUSDT"
+    // );
+    // setCakePrice(cakePrice?.data?.lastPrice);
+    setCakePrice(2);
+  };
+
+  const calcTotal = () => {
+    if (currentUser && currentUser.money) {
+      const { busd, usdt, usd, cake, bitp, quest } = currentUser.money;
+      return (
+        (busd ?? 0) +
+        (usdt ?? 0) +
+        (usd ?? 0) +
+        (cake * cakePrice ?? 0) +
+        (bitp * 0.06 ?? 0) +
+        (quest * 3 ?? 0)
+      );
+    }
+    return 0;
+  };
+
+  useEffect(() => {
+    getCakePrice();
+  }, []);
 
   useEffect(() => {
     setIsOpen(open);
@@ -236,14 +264,16 @@ const MobileNav = ({ open, close }: { open: boolean; close: () => void }) => {
               <Link href="/wallet">
                 <div className="cursor-pointer px-1 py-4 flex items-center gap-1 bg-primary-950 rounded-l h-12">
                   <USDG width="15.194" height={"19.075"} />
-                  <div className="font-medium text-xs text-white font-Poppins">
-                    33 USDG
+                  <div className="font-medium whitespace-nowrap text-xs text-white font-Poppins">
+                    {calcTotal().toFixed(2)}
                   </div>
                   <div>
                     <QC width={"15.759"} height={"19.569"} />
                   </div>
-                  <div className="font-medium flex text-xs text-white font-Poppins">
-                    5 QC
+                  <div className="font-medium pr-2 flex text-xs text-white font-Poppins">
+                    {currentUser &&
+                      currentUser.money &&
+                      currentUser.money.quest}{" "}
                   </div>
                 </div>
               </Link>
