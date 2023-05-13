@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 import { Header, Swap } from "@/components";
 import { EmptyTransaction, Filter, QC, USDG } from "@/public/icons";
 import Image from "next/image";
@@ -91,10 +91,7 @@ const Wallet = () => {
   }, []);
 
   const getCakePrice = async () => {
-    const cakePrice: any = await Axios.get(
-      "https://api.binance.com/api/v3/ticker/24hr?symbol=CAKEUSDT"
-    );
-    setCakePrice(cakePrice?.data?.lastPrice);
+    setCakePrice(2);
   };
 
   const items = useMemo(() => {

@@ -45,8 +45,8 @@ const Signup = (props: { close: () => void; switch: () => void }) => {
         localStorage.setItem("token", res.data.token);
         Cookies.set("uid", res.data.uid, { expires: 60 * 24 * 30 });
         dispatch(authActions.setCurrentUser(jwtDecode(res.data.token)));
-        reset();
         props.close();
+        reset();
       } else {
         notification.warning({
           message: "Error!",

@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { notification } from "antd";
-import Cookie from "js-cookie";
 
 import Input from "../Input";
 import Button, { butonTypes, variantTypes } from "../Button";
@@ -44,10 +43,9 @@ const Login = (props: { close: () => void; switch: () => void }) => {
         });
         console.log(res.data);
         localStorage.setItem("token", res.data.token);
-        Cookie.set("uid", res.data.uid, { expires: 60 * 24 * 30 });
         dispatch(authActions.setCurrentUser(jwtDecode(res.data.token)));
-        reset();
         props.close();
+        reset();
       } else {
         notification.warning({
           message: "Error!",

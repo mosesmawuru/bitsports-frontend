@@ -5,7 +5,6 @@ import Pagination from "@/components/Pagination";
 import QuestComponent from "@/components/Quest";
 import Footer from "@/components/Footer";
 import { SERVER_URI } from "@/config";
-import Cookies from "js-cookie";
 
 export default function Home() {
   const [data, setData] = useState([]);
