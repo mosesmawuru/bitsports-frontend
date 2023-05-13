@@ -23,7 +23,7 @@ const schema = yup.object().shape({
   password: yup.string().required("Password is required"),
 });
 
-const Login = (props: any) => {
+const Login = (props: { close: () => void; switch: () => void }) => {
   const {
     register,
     handleSubmit,
@@ -41,6 +41,7 @@ const Login = (props: any) => {
           message: "Success!",
           description: "You're signed successfully!",
         });
+        console.log(res.data);
         localStorage.setItem("token", res.data.token);
         dispatch(authActions.setCurrentUser(jwtDecode(res.data.token)));
         props.close();
@@ -102,10 +103,13 @@ const Login = (props: any) => {
       </form>
 
       <div className="lg:mt-24 mt-14 flex flex-col justify-center items-center lg:gap-10 gap-16">
-        <Link href="#" className="font-medium text-lg text-white">
+        <div
+          onClick={props.switch}
+          className="font-medium text-lg text-white cursor-pointer"
+        >
           New to BitPool ?{" "}
           <span className="text-secondary-100">Create a BitPool Account</span>
-        </Link>
+        </div>
 
         <div className="flex flex-col justify-center items-center gap-2">
           <div className="lg:text-xl text-base text-white font-light">

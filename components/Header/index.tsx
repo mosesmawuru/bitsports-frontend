@@ -60,23 +60,6 @@ const Header = () => {
     return 0;
   };
 
-  useEffect(() => {
-    const getFromLocalStorage = (key: string) => {
-      if (!key || typeof window === "undefined" || !localStorage) {
-        return "";
-      }
-      return window.localStorage.getItem(key);
-    };
-
-    const token = getFromLocalStorage("token");
-    dispatch(authActions.setCurrentUser(token ? jwtDecode(token) : {}));
-    getCakePrice();
-    const user: any = token ? jwtDecode(token) : null;
-    Axios.post(`${SERVER_URI}/getUserInfo`, { user: user?.id }).then(res => {
-      localStorage.setItem('token', res.data.token);
-    })
-  }, []);
-
   const toggleLogin = () => {
     setIsOpenSignup(false);
     setIsOpenLogin(!isOpenLogin);
@@ -96,6 +79,50 @@ const Header = () => {
     dispatch(authActions.setCurrentUser({}));
     router.push("/");
   };
+
+  const clickLoginRoute = () => {
+    toggleSignup();
+    toggleLogin();
+  };
+
+  const clickSignupRoute = () => {
+    toggleLogin();
+    toggleSignup();
+  };
+
+  useEffect(() => {
+    getCakePrice();
+  }, []);
+
+  useEffect(() => {
+    const getFromLocalStorage = (key: string) => {
+      if (!key || typeof window === "undefined" || !localStorage) {
+        return "";
+      }
+      return window.localStorage.getItem(key);
+    };
+
+    const token = getFromLocalStorage("token");
+    dispatch(authActions.setCurrentUser(token ? jwtDecode(token) : {}));
+    getCakePrice();
+    const user: any = token ? jwtDecode(token) : null;
+    Axios.post(`${SERVER_URI}/getUserInfo`, { user: user?.id }).then((res) => {
+      localStorage.setItem("token", res.data.token);
+    });
+  }, []);
+
+  useEffect(() => {
+    const getFromLocalStorage = (key: string) => {
+      if (!key || typeof window === "undefined" || !localStorage) {
+        return "";
+      }
+      return window.localStorage.getItem(key);
+    };
+
+    const token = getFromLocalStorage("token");
+    dispatch(authActions.setCurrentUser(token ? jwtDecode(token) : {}));
+  }, []);
+
   return (
     <>
       <div className="bg-primary-200 small-border-b xl:border-b-primary-150 border-b-black">
@@ -138,7 +165,9 @@ const Header = () => {
                         <QC width={"29.759"} height={"34.569"} />
                       </div>
                       <div className="font-medium flex lg:text-base text-xs text-white font-Poppins">
-                        {currentUser && currentUser.money && currentUser.money.quest}{" "}
+                        {currentUser &&
+                          currentUser.money &&
+                          currentUser.money.quest}{" "}
                         QC
                       </div>
                     </div>
@@ -217,7 +246,7 @@ const Header = () => {
               </div>
               <div
                 onClick={logout}
-                className="text-white font-bold cursor-pointer"
+                className="text-white hidden md:block md:ml-7 font-bold cursor-pointer"
               >
                 Logout
               </div>
@@ -232,14 +261,14 @@ const Header = () => {
       <MobileNav open={isNavOpen} close={toggleNav} />
       <Modal
         key={0}
-        Body={<Login close={toggleLogin} />}
+        Body={<Login switch={clickSignupRoute} close={toggleLogin} />}
         isOpen={isOpenLogin}
         close={toggleLogin}
         isVoid={1}
       />
       <Modal
         key={1}
-        Body={<Signup close={toggleSignup} />}
+        Body={<Signup switch={clickLoginRoute} close={toggleSignup} />}
         isOpen={isOpenSignup}
         close={toggleSignup}
         isVoid={2}
