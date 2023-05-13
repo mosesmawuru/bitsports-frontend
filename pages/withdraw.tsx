@@ -274,11 +274,8 @@ const Withdraw = () => {
                     />
                   )}
                 </div>
-                <div className="mt-20 xl:ml-28 flex w-full justify-center">
-                  <EmptyTransaction />
-                </div>
                 {!history.length && (
-                  <div className="mt-20 flex w-full justify-center">
+                  <div className="mt-20 xl:ml-28 flex w-full justify-center">
                     <EmptyTransaction />
                   </div>
                 )}

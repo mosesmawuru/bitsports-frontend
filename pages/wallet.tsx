@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 import { Header, Swap } from "@/components";
 import { EmptyTransaction, Filter, QC, USDG } from "@/public/icons";
 import Image from "next/image";
@@ -18,6 +18,7 @@ import { SERVER_URI } from "@/config";
 import { notification } from "antd";
 import { authActions } from "@/store/auth";
 import jwtDecode from "jwt-decode";
+import { useRouter } from "next/router";
 
 const navs = ["DEPOSIT", "WITHDRAW", "SWAP"];
 
@@ -26,6 +27,7 @@ const Wallet = () => {
   const [cakePrice, setCakePrice] = useState<number>(0);
   const [isSwapOpen, setIsSwapOpen] = useState(false);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const toggleSwap = () => {
     setIsSwapOpen(!isSwapOpen);
@@ -57,12 +59,12 @@ const Wallet = () => {
   };
   const gotoDeposit = (type: string) => {
     localStorage.setItem("type", type);
-    window.location.href = "/deposit";
+    router.push("/deposit");
   };
 
   const gotoWithdraw = (type: string) => {
     localStorage.setItem("type", type);
-    window.location.href = "/withdraw";
+    router.push("/withdraw");
   };
 
   useEffect(() => {
