@@ -25,7 +25,7 @@ export default function Home() {
             <h2 className="text-white mb-4 font-bold text-xl px-8 pt-4 xl:pt-0 xl:px-0 xl:text-6xl xl:text-4xl text-center font-Poppins">
               WORLD FIRST PLAY-TO-EARN POOL GAME
             </h2>
-            <Button px="px-4" text="Play Bit Pool Web" />
+            <Button px="px-4" text="Test2Earn" />
           </div>
         </div>
       </div>

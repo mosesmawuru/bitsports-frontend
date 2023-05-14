@@ -79,11 +79,11 @@ const items = [
     icon: <News />,
     url: "/events",
   },
-  {
-    title: "TUTORIAL",
-    icon: <Tutorial />,
-    url: "#",
-  },
+  // {
+  //   title: "TUTORIAL",
+  //   icon: <Tutorial />,
+  //   url: "#",
+  // },
   {
     title: "DAPP",
     icon: <Dapp />,

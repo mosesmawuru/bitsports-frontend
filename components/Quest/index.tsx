@@ -125,18 +125,36 @@ const QuestComponent = (prop: IProp) => {
           <div className="text-lg">CHALLENGE INFO</div>
           <div className="mt-5 mb-3 flex items-center justify-between">
             <div className="text-sm">
-              AMOUNT: <span className="text-white"> 10 BITP</span>
+              AMOUNT:{" "}
+              <span className="text-white">
+                {" "}
+                {prop.quest.amount}{" "}
+                {prop.quest.coin_sku === 1
+                  ? "BITP"
+                  : prop.quest.coin_sku === 2
+                  ? "BUSD"
+                  : "USDT"}
+              </span>
             </div>
             <div className="text-sm">
-              QUEST CREDIT: <span className="text-white"> 0.5</span>
+              QUEST CREDIT: <span className="text-white"> {prop.quest.qc}</span>
             </div>
           </div>
           <div className="flex items-center justify-between">
             <div className="text-sm">
-              WIN STREAK: <span className="text-white"> 3</span>
+              WIN STREAK:{" "}
+              <span className="text-white"> {prop.quest.streak}</span>
             </div>
             <div className="text-sm">
-              DIFFICULTY: <span className="text-white"> HARD</span>
+              DIFFICULTY:{" "}
+              <span className="text-white">
+                {" "}
+                {prop.quest.difficalty === 1
+                  ? "HARD"
+                  : prop.quest.difficalty === 2
+                  ? "MEDIUM"
+                  : "HARD"}
+              </span>
             </div>
           </div>
         </motion.div>
