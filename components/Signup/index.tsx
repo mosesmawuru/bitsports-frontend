@@ -43,7 +43,6 @@ const Signup = (props: { close: () => void; switch: () => void }) => {
           description: "You're registered successfully!",
         });
         localStorage.setItem("token", res.data.token);
-        Cookies.set("uid", res.data.uid, { expires: 60 * 24 * 30 });
         dispatch(authActions.setCurrentUser(jwtDecode(res.data.token)));
         props.close();
         reset();

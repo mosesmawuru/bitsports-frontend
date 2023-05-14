@@ -19,6 +19,7 @@ import { notification } from "antd";
 import { authActions } from "@/store/auth";
 import jwtDecode from "jwt-decode";
 import { useRouter } from "next/router";
+import { getCake } from "@/service/helper";
 
 const navs = ["DEPOSIT", "WITHDRAW", "SWAP"];
 
@@ -29,21 +30,19 @@ const Wallet = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const getFromLocalStorage = (key: string) => {
+    if (!key || typeof window === "undefined" || !localStorage) {
+      return "";
+    }
+    return window.localStorage.getItem(key);
+  };
+
   const toggleSwap = () => {
     setIsSwapOpen(!isSwapOpen);
-    const getFromLocalStorage = (key: string) => {
-      if (!key || typeof window === "undefined" || !localStorage) {
-        return "";
-      }
-      return window.localStorage.getItem(key);
-    };
-    const token = getFromLocalStorage("token");
-    const userInfo: any = token ? jwtDecode(token) : {};
-    if (userInfo) {
-      const user = { user: userInfo.id };
+    if (currentUser) {
+      const user = { user: currentUser.id };
       Axios.post(`${SERVER_URI}/getUserInfo`, user).then((res) => {
         if (res.data.success) {
-          console.log("success");
           localStorage.setItem("token", res.data.token);
           dispatch(authActions.setCurrentUser(jwtDecode(res.data.token)));
         } else {
@@ -68,12 +67,6 @@ const Wallet = () => {
   };
 
   useEffect(() => {
-    const getFromLocalStorage = (key: string) => {
-      if (!key || typeof window === "undefined" || !localStorage) {
-        return "";
-      }
-      return window.localStorage.getItem(key);
-    };
     const token = getFromLocalStorage("token");
     const userInfo: any = token ? jwtDecode(token) : {};
     if (userInfo) {
@@ -93,7 +86,9 @@ const Wallet = () => {
   }, []);
 
   const getCakePrice = async () => {
-    setCakePrice(2);
+    getCake().then(price => {
+      setCakePrice(price);
+    });
   };
 
   const items = useMemo(() => {

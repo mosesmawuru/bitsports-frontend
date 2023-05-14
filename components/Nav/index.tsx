@@ -26,6 +26,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IState } from "@/store";
 import { useRouter } from "next/router";
 import { authActions } from "@/store/auth";
+import { getCake } from "@/service/helper";
 
 const itemVariants: Variants = {
   open: {
@@ -165,11 +166,9 @@ const MobileNav = ({ open, close }: { open: boolean; close: () => void }) => {
   };
 
   const getCakePrice = async () => {
-    // const cakePrice: any = await Axios.get(
-    //   "https://api.binance.com/api/v3/ticker/24hr?symbol=CAKEUSDT"
-    // );
-    // setCakePrice(cakePrice?.data?.lastPrice);
-    setCakePrice(2);
+    getCake().then(price => {
+      setCakePrice(price);
+    });
   };
 
   const calcTotal = () => {

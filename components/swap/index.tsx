@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { IState } from "@/store";
 import { SERVER_URI } from "@/config";
 import { notification } from "antd";
+import { getCake } from "@/service/helper";
 
 const itemsFrom = [
   {
@@ -135,7 +136,9 @@ const SwapCoin = ({ next }: { next: (num?: number) => void }) => {
   }, [cakePrice]);
 
   const getCakePrice = async () => {
-    setCakePrice(2);
+    getCake().then(price => {
+      setCakePrice(price);
+    });
   };
 
   useEffect(() => {
@@ -188,8 +191,6 @@ const SwapCoin = ({ next }: { next: (num?: number) => void }) => {
           message: "Success!",
           description: res.data.message,
         });
-        // localStorage.setItem("token", res.data.token);
-        // dispatch(authActions.setCurrentUser(jwtDecode(res.data.token)));
       } else {
         notification.warning({
           message: "Warning!",

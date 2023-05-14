@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { ArrowDown, Quest } from "@/public/icons";
 import Button, { variantTypes, volumeTypes } from "../Button";
 import { IState } from "@/store";
-import Cookie from "js-cookie";
 import Axios from "axios";
 import { SERVER_URI } from "@/config";
 import { notification } from "antd";
@@ -33,8 +32,6 @@ const QuestComponent = (prop: IProp) => {
   const [open, setOpen] = useState(false);
   const { currentUser } = useSelector((state: IState) => state.auth);
 
-  const uid: any = Cookie.get("uid");
-
   const startGame = () => {
     if (!currentUser) {
       notification.warning({
@@ -45,10 +42,11 @@ const QuestComponent = (prop: IProp) => {
     }
     localStorage.setItem("cid", prop.quest._id);
     localStorage.setItem("level", prop.quest.difficalty.toString());
+    const uid: any = currentUser.id;
 
     Axios.post(`${SERVER_URI}/game/start`, {
       cid: prop.quest._id,
-      uid: uid,
+      uid,
     }).then((res) => {
       if (res.data.success) {
         router.push("/game");
