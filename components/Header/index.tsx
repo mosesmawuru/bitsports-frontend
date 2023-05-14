@@ -25,6 +25,7 @@ import { authActions } from "@/store/auth";
 import { SERVER_URI } from "@/config";
 import Axios from "axios";
 import { useRouter } from "next/router";
+import { getCake } from "@/service/helper";
 
 const Header = () => {
   const { currentUser } = useSelector((state: IState) => state.auth);
@@ -37,12 +38,17 @@ const Header = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const getFromLocalStorage = (key: string) => {
+    if (!key || typeof window === "undefined" || !localStorage) {
+      return "";
+    }
+    return window.localStorage.getItem(key);
+  };
+
   const getCakePrice = async () => {
-    // const cakePrice: any = await Axios.get(
-    //   "https://api.binance.com/api/v3/ticker/24hr?symbol=CAKEUSDT"
-    // );
-    // setCakePrice(cakePrice?.data?.lastPrice);
-    setCakePrice(2);
+    getCake().then(price => {
+      setCakePrice(price);
+    });
   };
 
   const calcTotal = () => {
@@ -91,36 +97,15 @@ const Header = () => {
   };
 
   useEffect(() => {
-    getCakePrice();
-  }, []);
-
-  useEffect(() => {
-    const getFromLocalStorage = (key: string) => {
-      if (!key || typeof window === "undefined" || !localStorage) {
-        return "";
-      }
-      return window.localStorage.getItem(key);
-    };
-
     const token = getFromLocalStorage("token");
-    dispatch(authActions.setCurrentUser(token ? jwtDecode(token) : {}));
-    getCakePrice();
     const user: any = token ? jwtDecode(token) : null;
-    Axios.post(`${SERVER_URI}/getUserInfo`, { user: user?.id }).then((res) => {
-      localStorage.setItem("token", res.data.token);
-    });
-  }, []);
-
-  useEffect(() => {
-    const getFromLocalStorage = (key: string) => {
-      if (!key || typeof window === "undefined" || !localStorage) {
-        return "";
-      }
-      return window.localStorage.getItem(key);
-    };
-
-    const token = getFromLocalStorage("token");
-    dispatch(authActions.setCurrentUser(token ? jwtDecode(token) : {}));
+    dispatch(authActions.setCurrentUser(token ? user : {}));
+    getCakePrice();
+    if(user) {
+      Axios.post(`${SERVER_URI}/getUserInfo`, { user: user?.id }).then((res) => {
+        localStorage.setItem("token", res.data.token);
+      });
+    }
   }, []);
 
   return (

@@ -41,7 +41,6 @@ const Login = (props: { close: () => void; switch: () => void }) => {
           message: "Success!",
           description: "You're signed successfully!",
         });
-        console.log(res.data);
         localStorage.setItem("token", res.data.token);
         dispatch(authActions.setCurrentUser(jwtDecode(res.data.token)));
         props.close();
