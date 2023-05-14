@@ -36,10 +36,10 @@ const items = [
     icon: BITP,
     name: "BITP",
   },
-  {
-    icon: QIC,
-    name: "Quest Credit",
-  },
+  // {
+  //   icon: QIC,
+  //   name: "Quest Credit",
+  // },
 ];
 
 const networks = [
