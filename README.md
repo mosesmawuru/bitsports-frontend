@@ -25,6 +25,7 @@ BitPool Quest is a fun and challenging way to earn BUSD, USDT, CAKE, BITP & PAYP
 
 Signup / Signin 
 Browse through admin created quests 
+Every user gets 3 QC upon sign up
 Accept BITP Quests for free , Play game & earn
 Accept BUSD, CAKE, USDT & other quests using Quest Credit, Play Game & earn 
 
