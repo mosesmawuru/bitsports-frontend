@@ -86,7 +86,7 @@ const Wallet = () => {
   }, []);
 
   const getCakePrice = async () => {
-    getCake().then(price => {
+    getCake().then((price) => {
       setCakePrice(price);
     });
   };
@@ -114,13 +114,6 @@ const Wallet = () => {
           icon: CAKE,
           name: "CAKE",
           value: cake ? cake.toFixed(2) : 0,
-          type: "deposit",
-          hasWithdraw: true,
-        },
-        {
-          icon: Paypal,
-          name: "PAYPAL",
-          value: usd ? usd.toFixed(2) : 0,
           type: "deposit",
           hasWithdraw: true,
         },

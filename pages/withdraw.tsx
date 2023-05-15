@@ -10,6 +10,7 @@ import moment from "moment";
 import Select from "@/components/Select";
 import USDT from "@/public/usdt.png";
 import QIC from "@/public/qc.png";
+import CAKE from "@/public/cake.png";
 import Paypal from "@/public/paypal.png";
 import BUSD from "@/public/busd.png";
 import BITP from "@/public/bitp.png";
@@ -29,16 +30,8 @@ const items = [
     name: "USDT",
   },
   {
-    icon: Paypal,
-    name: "USD",
-  },
-  {
-    icon: BITP,
-    name: "BITP",
-  },
-  {
-    icon: QIC,
-    name: "Quest Credit",
+    icon: CAKE,
+    name: "CAKE",
   },
 ];
 
