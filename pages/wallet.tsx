@@ -248,7 +248,7 @@ const Wallet = () => {
                   {item.hasWithdraw && (
                     <Link href={"/withdraw"}>
                       <button
-                        className={`font-bold xl:hidden text-sm text-white bg-secondary-350 h-7 lg:h-9 ten px-1 lg:px-2 w-16 lg:w-24`}
+                        className={`font-bold xl:hidden text-sm text-white bg-secondary-350 h-7 lg:h-9 ten px-1 lg:px-2 w-16 lg:w-24 ml-12`}
                       >
                         WITHDRAW
                       </button>

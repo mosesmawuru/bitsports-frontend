@@ -65,10 +65,16 @@ const QuestComponent = (prop: IProp) => {
         className="bg-primary-400 lg:h-20 h-14 px-5 items-center flex justify-between"
         key={prop.index}
       >
-        <div className="h-11 w-11 rounded-full bg-white flex justify-center items-center">
+        <div
+          onClick={() => setOpen(!open)}
+          className="h-11 w-11 rounded-full bg-white flex justify-center items-center"
+        >
           <Quest />
         </div>
-        <div className={`flex flex-col items-center`}>
+        <div
+          onClick={() => setOpen(!open)}
+          className={`flex flex-col items-center`}
+        >
           <div className="text-primary-450 text-sm font-bold">AMOUNT</div>
           <div className=" text-white text-base font-semibold">
             {prop.quest.amount}{" "}
@@ -79,19 +85,28 @@ const QuestComponent = (prop: IProp) => {
               : "USDT"}
           </div>
         </div>
-        <div className={`flex flex-col items-center`}>
+        <div
+          onClick={() => setOpen(!open)}
+          className={`flex flex-col items-center`}
+        >
           <div className="text-primary-450 text-sm font-bold">WIN STREAK</div>
           <div className=" text-white text-base font-semibold">
             {prop.quest.streak}
           </div>
         </div>
-        <div className={`flex flex-col items-center hide`}>
+        <div
+          onClick={() => setOpen(!open)}
+          className={`flex flex-col items-center hide`}
+        >
           <div className="text-primary-450 text-sm font-bold">QUEST CREDIT</div>
           <div className=" text-white text-base font-semibold">
             {prop.quest.qc}
           </div>
         </div>
-        <div className={`flex flex-col items-center hide`}>
+        <div
+          onClick={() => setOpen(!open)}
+          className={`flex flex-col items-center hide`}
+        >
           <div className="text-primary-450 text-sm font-bold">DIFFICALTY</div>
           <div className=" text-white text-base font-semibold">
             {prop.quest.difficalty === 1
