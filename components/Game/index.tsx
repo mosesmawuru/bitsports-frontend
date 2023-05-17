@@ -10,7 +10,7 @@ import jwtDecode from "jwt-decode";
 
 export default function GameComponent() {
   const [uid, setUid] = useState(0);
-  const [cid, setCid] = useState("");
+  const [cid, setCid] = useState(0);
   const router = useRouter();
   const { currentUser } = useSelector((state: IState) => state.auth);
 
@@ -42,9 +42,9 @@ export default function GameComponent() {
     };
 
     const cid: any = getFromLocalStorage("cid");
-    const token: any = getFromLocalStorage('token');
-    setCid(cid);
-    setUid(token ? jwtDecode(token) : 0);
+
+    setCid(Number(cid));
+    setUid(Number(currentUser.index));
   }, [currentUser]);
 
   return (
