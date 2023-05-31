@@ -222,7 +222,7 @@ const SwapCoin = ({ next }: { next: (num?: number) => void }) => {
         </div>
         <div className="absolute opacity-40 right-0 lg:-left-8 mt-5 lg:w-modal w-full thin-line bg-white" />
       </div>
-      <div className="mt-24 flex items-center justify-between gap-2">
+      <div className="mt-24 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2">
         <Select
           key={0}
           name={coinFrom}
@@ -246,7 +246,7 @@ const SwapCoin = ({ next }: { next: (num?: number) => void }) => {
           <SwapIcon />
         </div>
       </div>
-      <div className="mt-14 flex items-center justify-between gap-2">
+      <div className="mt-14 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2">
         <Select
           key={0}
           name={coinTo}
