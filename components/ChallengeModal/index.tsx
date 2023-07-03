@@ -81,13 +81,13 @@ const ChallengeModal: React.FC = () => {
           rules={[{ required: true, message: "Please select difficalty." }]}
         >
           <Select>
-            <Select.Option key={1} value={1}>
+            <Select.Option key={1} value={0}>
               Easy
             </Select.Option>
-            <Select.Option key={2} value={2}>
+            <Select.Option key={2} value={1}>
               Medium
             </Select.Option>
-            <Select.Option key={3} value={3}>
+            <Select.Option key={3} value={2}>
               Hard
             </Select.Option>
           </Select>

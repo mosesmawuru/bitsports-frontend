@@ -65,6 +65,11 @@ const items = [
     url: "/",
   },
   {
+    title: "Pool Arena",
+    icon: <Ball width={"28.014"} height={"28.014"} fill="#777786" />,
+    url: "/challenges",
+  },
+  {
     title: "NFT",
     icon: <Nft />,
     url: "/nft",
@@ -166,7 +171,7 @@ const MobileNav = ({ open, close }: { open: boolean; close: () => void }) => {
   };
 
   const getCakePrice = async () => {
-    getCake().then(price => {
+    getCake().then((price) => {
       setCakePrice(price);
     });
   };
@@ -193,7 +198,6 @@ const MobileNav = ({ open, close }: { open: boolean; close: () => void }) => {
   useEffect(() => {
     setIsOpen(open);
   }, [open]);
-  console.log(currentUser)
 
   return (
     <>

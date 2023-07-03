@@ -15,11 +15,11 @@ interface ISelect {
   hasCopy?: boolean;
 }
 
-const Select = (props: ISelect) => {
+const ChallengeSelect = (props: ISelect) => {
   const { handleCopy, render } = useCopy();
 
   const [selected, setSelected] = useState({
-    icon: props.icon,
+    icon: props.icon ? props.icon : "",
     name: props.name,
   });
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +30,7 @@ const Select = (props: ISelect) => {
 
   const onChange = (data: any) => {
     setSelected({
-      icon: data.icon,
+      icon: data.icon ? data.icon : "",
       name: data.name,
     });
 
@@ -41,34 +41,31 @@ const Select = (props: ISelect) => {
 
   useEffect(() => {
     setSelected({
-      icon: props.icon,
+      icon: props.icon ? props.icon : "",
       name: props.name,
     });
   }, []);
+
   return (
-    <div className="relative w-full mb-7">
-      <div
-        className={classNames(
-          "text-primary-1100 font-bold lg:text-base text-sm mb-1",
-          {
-            hidden: !props.label,
-          }
-        )}
-      >
+    <div className="relative w-full mb-5">
+      <label className="text-sm font-bold text-white mb-0.5">
         {props.label}
-      </div>
-      <div className="rounded px-5 xl:px-8 h-16 bg-secondary-400 outline-none flex items-center justify-between">
+      </label>
+      <div className="rounded mt-0.5 px-5 h-12 text-base outline-none flex items-center justify-between border border-primary-750">
         <div className="flex items-center gap-4">
-          <Image
-            priority={true}
-            height={44}
-            width={38}
-            src={selected.icon}
-            alt="icon"
-            className={classNames({
-              hidden: !props.icon,
-            })}
-          />
+          {selected.icon && (
+            <Image
+              priority={true}
+              height={25}
+              width={22}
+              src={selected.icon}
+              alt="icon"
+              className={classNames({
+                hidden: !props.icon,
+              })}
+            />
+          )}
+
           <div className="text-white font-medium text-sm xl:text-lg">
             {props.name}
           </div>
@@ -118,4 +115,4 @@ const Select = (props: ISelect) => {
   );
 };
 
-export default Select;
+export default ChallengeSelect;

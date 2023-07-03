@@ -26,6 +26,8 @@ import { SERVER_URI } from "@/config";
 import Axios from "axios";
 import { useRouter } from "next/router";
 import { getCake } from "@/service/helper";
+import Userchallenge from "./userchallenge";
+import Openchallenge from "./openchallenge";
 
 const Header = () => {
   const { currentUser } = useSelector((state: IState) => state.auth);
@@ -33,6 +35,8 @@ const Header = () => {
   const [isOpenSignup, setIsOpenSignup] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isChallengeOpen, setIsChallengeOpen] = useState(false);
+  const [isErrorChallengeOpen, setIsErrorChallengeOpen] = useState(false);
+  const [isSuccessChallengeOpen, setIsSuccessChallengeOpen] = useState(false);
   const [cakePrice, setCakePrice] = useState<number>(0);
 
   const dispatch = useDispatch();
@@ -46,7 +50,7 @@ const Header = () => {
   };
 
   const getCakePrice = async () => {
-    getCake().then(price => {
+    getCake().then((price) => {
       setCakePrice(price);
     });
   };
@@ -70,16 +74,28 @@ const Header = () => {
     setIsOpenSignup(false);
     setIsOpenLogin(!isOpenLogin);
   };
+
   const toggleSignup = () => {
     setIsOpenLogin(false);
     setIsOpenSignup(!isOpenSignup);
   };
+
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
   };
+
   const toggleChallenge = () => {
     setIsChallengeOpen(!isChallengeOpen);
   };
+
+  const toggleErrorChallenge = () => {
+    setIsErrorChallengeOpen(!isErrorChallengeOpen);
+  };
+
+  const toggleSuccessChallenge = () => {
+    setIsSuccessChallengeOpen(!isSuccessChallengeOpen);
+  };
+
   const logout = () => {
     localStorage.removeItem("token");
     dispatch(authActions.setCurrentUser({}));
@@ -101,10 +117,12 @@ const Header = () => {
     const user: any = token ? jwtDecode(token) : null;
     dispatch(authActions.setCurrentUser(token ? user : {}));
     getCakePrice();
-    if(user) {
-      Axios.post(`${SERVER_URI}/getUserInfo`, { user: user?.id }).then((res) => {
-        localStorage.setItem("token", res.data.token);
-      });
+    if (user) {
+      Axios.post(`${SERVER_URI}/getUserInfo`, { user: user?.id }).then(
+        (res) => {
+          localStorage.setItem("token", res.data.token);
+        }
+      );
     }
   }, []);
 
@@ -260,9 +278,23 @@ const Header = () => {
       />
       <Modal
         key={2}
-        Body={<NoChallenge />}
+        Body={<NoChallenge toggledChallenge={toggleChallenge} />}
         isOpen={isChallengeOpen}
         close={toggleChallenge}
+        isVoid={3}
+      />
+      <Modal
+        key={3}
+        Body={<ErrorChallenge toggledChallenge={toggleErrorChallenge} />}
+        isOpen={isErrorChallengeOpen}
+        close={toggleErrorChallenge}
+        isVoid={3}
+      />
+      <Modal
+        key={4}
+        Body={<SuccessChallenge toggledChallenge={toggleSuccessChallenge} />}
+        isOpen={isSuccessChallengeOpen}
+        close={toggleSuccessChallenge}
         isVoid={3}
       />
     </>
@@ -271,15 +303,59 @@ const Header = () => {
 
 export default Header;
 
-export const NoChallenge = () => {
+export const NoChallenge = (props: any) => {
+  const [tabflag, setTabflag] = useState(true);
+
   return (
-    <div className="flex flex-col justify-center items-center gap-7">
-      <Game />
+    <div className="flex flex-col justify-center px-5 items-center gap-7 w-full">
       <div className="lg:text-2xl text-xl font-bold text-primary-900">
         CREATE CHALLENGE
       </div>
-      <div className="lg:text-xl text-lg font-bold text-primary-450">
-        This Feature Is Coming Soon
+      <div className="challenge-modal-tab w-full">
+        <div
+          className={`challenge-modal-tab-item ${
+            tabflag ? "challenge-modal-tab-item-active" : ""
+          } h-12 text-primary-750`}
+          onClick={() => setTabflag(true)}
+        >
+          User Challenge
+        </div>
+        <div
+          className={`challenge-modal-tab-item ${
+            !tabflag ? "challenge-modal-tab-item-active" : ""
+          } h-12 text-primary-750`}
+          onClick={() => setTabflag(false)}
+        >
+          Open Challenge
+        </div>
+      </div>
+      {tabflag ? (
+        <Userchallenge close={props.toggledChallenge} />
+      ) : (
+        <Openchallenge close={props.toggledChallenge} />
+      )}
+    </div>
+  );
+};
+
+export const ErrorChallenge = (props: any) => {
+  return (
+    <div className="flex flex-col justify-center px-5 items-center gap-7 w-full">
+      <div className="lg:text-2xl text-xl font-bold text-primary-900">
+        ERROR!
+      </div>
+    </div>
+  );
+};
+
+export const SuccessChallenge = (props: any) => {
+  return (
+    <div className="flex flex-col justify-center px-5 items-center gap-7 w-full">
+      <div className="lg:text-2xl text-xl font-bold text-primary-900">
+        CREATE CHALLENGE SUCCESSFULLY
+      </div>
+      <div className="lg:text-2xl text-xl font-bold text-primary-900">
+        CREATE CHALLENGE SUCCESSFULLY
       </div>
     </div>
   );

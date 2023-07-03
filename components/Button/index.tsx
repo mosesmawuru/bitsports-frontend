@@ -8,6 +8,7 @@ export enum variantTypes {
   primary = "primary",
   secondary = "secondary",
   outline = "outline",
+  challenge = "challenge",
   full = "full",
 }
 
@@ -27,6 +28,7 @@ interface IPNSButton {
   py?: string;
   textVol?: volumeTypes;
   isFull?: boolean;
+  isW80?: boolean;
 }
 const Button = ({
   text,
@@ -37,6 +39,7 @@ const Button = ({
   px = "px-6",
   textVol = volumeTypes.md,
   isFull,
+  isW80,
   py = "py-2.5",
 }: IPNSButton) => {
   return (
@@ -53,6 +56,8 @@ const Button = ({
             ? "bg-secondary-150 border-secondary-150"
             : variant === "outline"
             ? "bg-transparent border border-secondary-50"
+            : variant === "challenge"
+            ? "bg-challenge-100 border-secondary-100"
             : variant === "full"
             ? "bg-secondary-100 border-secondary-100"
             : ""

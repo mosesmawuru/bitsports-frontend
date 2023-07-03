@@ -5,6 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import { authReducer } from "./auth";
 import { challengeReducer } from "./challenge";
+import { poolchallengeReducer } from "./poolchallenge";
 
 export interface IState {
   auth: {
@@ -36,11 +37,15 @@ export interface IState {
     flag: boolean;
     model: object;
   };
+  poolchallenge: {
+    model: object[];
+  };
 }
 
 const reducer = combineReducers({
   auth: authReducer,
   challenge: challengeReducer,
+  poolchallenge: poolchallengeReducer,
 });
 
 const store = configureStore({

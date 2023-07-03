@@ -22,7 +22,7 @@ export interface IProp {
     amount: number;
     streak: number;
     qc: number;
-    difficalty: number;
+    difficulty: number;
     coin_sku: number;
     index: number;
   };
@@ -42,7 +42,7 @@ const QuestComponent = (prop: IProp) => {
       return;
     }
     localStorage.setItem("cid", prop.quest.index.toString());
-    localStorage.setItem("level", prop.quest.difficalty.toString());
+    localStorage.setItem("level", prop.quest.difficulty.toString());
     const uid: any = currentUser.index;
 
     Axios.post(`${SERVER_URI}/game/start`, {
@@ -112,9 +112,9 @@ const QuestComponent = (prop: IProp) => {
         >
           <div className="text-primary-450 text-sm font-bold">DIFFICALTY</div>
           <div className=" text-white text-base font-semibold">
-            {prop.quest.difficalty === 1
+            {prop.quest.difficulty === 1
               ? "EASY"
-              : prop.quest.difficalty === 2
+              : prop.quest.difficulty === 2
               ? "MEDIUM"
               : "HARD"}
           </div>
@@ -167,9 +167,9 @@ const QuestComponent = (prop: IProp) => {
               DIFFICULTY:{" "}
               <span className="text-white">
                 {" "}
-                {prop.quest.difficalty === 1
+                {prop.quest.difficulty === 1
                   ? "EASY"
-                  : prop.quest.difficalty === 2
+                  : prop.quest.difficulty === 2
                   ? "MEDIUM"
                   : "HARD"}
               </span>

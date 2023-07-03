@@ -1,20 +1,24 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface GenericState<T> {
-  data?: T;
+interface GenericState {
+  currentUser: object;
+  type: string;
 }
+
+const initialState: GenericState = {
+  currentUser: {},
+  type: "",
+};
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: {
-    currentUser:({} as GenericState<object>),
-    type: ''
-  },
+  initialState,
   reducers: {
     setCurrentUser: (state, action: PayloadAction<object>) => {
       state.currentUser = action.payload;
-    }
-  }
+      state.type = "";
+    },
+  },
 });
 
 export const authReducer = authSlice.reducer;

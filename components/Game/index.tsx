@@ -1,18 +1,22 @@
 import { Header } from "@/components";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IState } from "@/store";
 import { notification } from "antd";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import axios from "axios";
+import { SERVER_URI } from "@/config";
 import FullScreen from "@/public/full-screen.svg";
 import jwtDecode from "jwt-decode";
+import { authActions } from "@/store/auth";
 
 export default function GameComponent() {
-  const [uid, setUid] = useState(0);
-  const [cid, setCid] = useState(0);
+  const [uid, setUid] = useState("");
+  const [cid, setCid] = useState("");
   const router = useRouter();
   const { currentUser } = useSelector((state: IState) => state.auth);
+  const dispatch = useDispatch();
 
   const requestFullScreen = () => {
     const elem: any = document.getElementById("iframe");
@@ -24,6 +28,36 @@ export default function GameComponent() {
       elem.msRequestFullscreen();
     }
   };
+
+  useEffect(() => {
+    window.onmessage = (e) => {
+      const elementdata: any = document.querySelector("#iframe_poolgame");
+      if (e.data.name === "gameconnected") {
+        const msg_data = {
+          name: "start_game_first",
+          currentUser: currentUser,
+          cid: window.localStorage.getItem("cid"),
+        };
+        elementdata.contentWindow.postMessage(msg_data, "*");
+      } else if (e.data.name === "gameendstatus") {
+        setTimeout(() => {
+          router.push("/challenges");
+        }, 5000);
+        axios
+          .post(`${SERVER_URI}/pool-game/end`, e.data)
+          .then((res) => {
+            localStorage.setItem("token", res.data.token);
+            dispatch(authActions.setCurrentUser(jwtDecode(res.data.token)));
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        console.log(e.data);
+      } else if (e.data.name === "gamedisconnected") {
+        alert(e.data.cid);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!currentUser) {
@@ -43,14 +77,13 @@ export default function GameComponent() {
 
     const cid: any = getFromLocalStorage("cid");
 
-    setCid(Number(cid));
-    setUid(Number(currentUser.index));
+    setCid(cid);
+    setUid(currentUser.id);
   }, [currentUser]);
 
   return (
     <div className="w-full absolute xl:relative top-0 left-0 h-full">
       <Header />
-
       <div className="min-h-90vh w-full bg-white relative">
         <Image
           priority={true}
@@ -63,12 +96,19 @@ export default function GameComponent() {
         />
         {uid && cid && (
           <iframe
-            src={`https://portal.bitpool.gg/?c=${cid}&u=${uid}`}
-            id="iframe"
+            // src={`https://portal.bitpool.gg/?c=${cid}&u=${uid}`}
+            // src={`https://pool-web-game.onrender.com/?c=${cid}&u=${uid}`}
+            src={`http://192.168.112.89:9001`}
+            // src="https://bitpool-gameserver.onrender.com"
+            id="iframe_poolgame"
             className="w-full absolute top-0 left-0 h-full"
           ></iframe>
         )}
       </div>
     </div>
   );
+}
+
+function getFromLocalStorage(arg0: string) {
+  throw new Error("Function not implemented.");
 }
