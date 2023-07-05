@@ -34,12 +34,12 @@ export const MintModal: React.FC<{
                   <Image src={checkImg} className="" alt="" />
                 </p>
                 <h1 className="text-white text-[21px] font-bold mb-6">
-                  {topItems.filter((f) => f.id === Number(id))[0].title}
+                  {topItems.filter((f) => f.id === Number(id))[0]?.title}
                 </h1>
               </div>
               <div className="h-[386px] relative">
                 <Image
-                  src={topItems.filter((f) => f.id === Number(id))[0].image}
+                  src={topItems.filter((f) => f.id === Number(id))[0]?.image}
                   className="w-full h-full object-cover"
                   alt=""
                 />
@@ -52,7 +52,7 @@ export const MintModal: React.FC<{
                   <div>
                     <div className="text-[23px] font-bold">MINT PRICE</div>
                     <div className="text-[26px] font-Poppins">
-                      {topItems.filter((f) => f.id === Number(id))[0].price}
+                      {topItems.filter((f) => f.id === Number(id))[0]?.price}
                     </div>
                   </div>
                   <button
@@ -71,7 +71,7 @@ export const MintModal: React.FC<{
                   <div className="flex justify-between text-[#848C9E] font-Poppins text-xs font-medium mb-2">
                     <span>creater name</span>
                     <span>
-                      {topItems.filter((f) => f.id === Number(id))[0].creator}
+                      {topItems.filter((f) => f.id === Number(id))[0]?.creator}
                     </span>
                   </div>
 
@@ -96,7 +96,7 @@ export const MintModal: React.FC<{
                   <Image src={checkImg} className="" alt="" />
                 </p>
                 <h1 className="text-white text-[34px] font-bold mb-3">
-                  {topItems.filter((f) => f.id === Number(id))[0].title}
+                  {topItems.filter((f) => f.id === Number(id))[0]?.title}
                 </h1>
               </div>
               <div className="hidden lg:block rounded py-7 px-6 bg-[#191C25] mb-[30px]">
@@ -104,7 +104,7 @@ export const MintModal: React.FC<{
                   <div>
                     <div className="text-[19px] font-bold">MINT PRICE</div>
                     <div className="text-[28px] font-Poppins">
-                      {topItems.filter((f) => f.id === Number(id))[0].price}
+                      {topItems.filter((f) => f.id === Number(id))[0]?.price}
                     </div>
                   </div>
                   <div>

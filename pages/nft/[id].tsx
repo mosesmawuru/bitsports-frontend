@@ -45,12 +45,12 @@ const NFTDetail: React.FC = () => {
                 <Image src={checkImg} className="" alt="" />
               </p>
               <h1 className="text-white text-[21px] font-bold mb-6">
-                {topItems.filter((f) => f.id === Number(id))[0].title}
+                {topItems.filter((f) => f.id === Number(id))[0]?.title}
               </h1>
             </div>
             <div className="h-[620px] relative">
               <Image
-                src={topItems.filter((f) => f.id === Number(id))[0].image}
+                src={topItems.filter((f) => f.id === Number(id))[0]?.image}
                 className="w-full h-full object-cover"
                 alt=""
               />
@@ -63,7 +63,7 @@ const NFTDetail: React.FC = () => {
                 <div>
                   <div className="text-[23px] font-bold">MINT PRICE</div>
                   <div className="text-[26px] font-Poppins">
-                    {topItems.filter((f) => f.id === Number(id))[0].price}
+                    {topItems.filter((f) => f.id === Number(id))[0]?.price}
                   </div>
                 </div>
                 <button
@@ -82,7 +82,7 @@ const NFTDetail: React.FC = () => {
                 <div className="flex justify-between text-[#848C9E] font-Poppins text-lg font-medium mb-2">
                   <span>creater name</span>
                   <span>
-                    {topItems.filter((f) => f.id === Number(id))[0].creator}
+                    {topItems.filter((f) => f.id === Number(id))[0]?.creator}
                   </span>
                 </div>
 
@@ -135,7 +135,7 @@ const NFTDetail: React.FC = () => {
                 <Image src={checkImg} className="" alt="" />
               </p>
               <h1 className="text-white text-[45px] font-bold mb-[49px]">
-                {topItems.filter((f) => f.id === Number(id))[0].title}
+                {topItems.filter((f) => f.id === Number(id))[0]?.title}
               </h1>
             </div>
             <div className="hidden lg:block rounded py-7 px-6 bg-[#191C25] mb-[30px]">
@@ -143,7 +143,7 @@ const NFTDetail: React.FC = () => {
                 <div>
                   <div className="text-[21px] font-bold">MINT PRICE</div>
                   <div className="text-[28px] font-Poppins">
-                    {topItems.filter((f) => f.id === Number(id))[0].price}
+                    {topItems.filter((f) => f.id === Number(id))[0]?.price}
                   </div>
                 </div>
                 <div>
