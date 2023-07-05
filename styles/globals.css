@@ -180,13 +180,31 @@ body {
 }
 
 .nft-text {
-  text-shadow: -0.5px 0 white, 0 0.5px white, 0.5px 0 white, 0 -0.5px white;
+  /* text-shadow: -0.5px 0 white, 0 0.5px white, 0.5px 0 white, 0 -0.5px white; */
+  -webkit-text-stroke: 1px #fff;
   font-size: 100px;
-  line-height: 30px;
+  line-height: 100px;
+}
+
+.nft-background {
+  background: url("/bitpool.png") no-repeat;
+  background-position: top;
+  background-size: cover;
+  border-radius: 4px;
+}
+
+.nft-background::after {
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  position: absolute;
+  right: 0;
+  border-radius: 4px;
+  background-color: #00000060;
 }
 
 .nft-sub {
-  padding: 0 500px;
 }
 
 .announce {
@@ -210,10 +228,57 @@ body {
   height: 0.04px;
 }
 
+.activities-table,
+.activities-table tr,
+.activities-table td,
+.activities-table th {
+  border-collapse: collapse;
+}
+
+.activities-table {
+  width: 100%;
+  white-space: nowrap;
+}
+
+.activities-table th {
+  text-transform: uppercase;
+  font-size: 21px;
+  font-weight: 700;
+  color: #848c9e;
+  text-align: left;
+  padding: 7px;
+}
+
+.activities-table td {
+  padding: 7px;
+  font-family: Poppins;
+  font-size: 16px;
+  color: #fff;
+}
+
+.activities-table.mint-modal-table td,
+.activities-table.mint-modal-table th {
+  font-size: 14px;
+}
+
+.mint-modal-wrapper {
+  transition: all 0.3s;
+}
+
+@media screen and (max-width: 1200px) {
+  .nft-card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media screen and (max-width: 1024px) {
   .nav-icon {
     width: 36.51px;
     height: 36.51px;
+  }
+
+  .activities-table th {
+    font-size: 18px;
   }
 
   .mobile-nav {
@@ -223,9 +288,28 @@ body {
   .leader {
     line-height: 55px;
   }
+}
 
+@media screen and (max-width: 768px) {
   .nft-text {
+    font-size: 53px;
     line-height: 55px;
+    margin-bottom: -20px;
+  }
+  .nft-background {
+    margin-top: 0;
+    width: 100%;
+    border-radius: 0px;
+  }
+  .nft-sub {
+    display: none;
+  }
+  .nft-text-sub {
+    margin-bottom: 30px;
+  }
+  .nft-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 }
 
@@ -276,6 +360,7 @@ body {
   .nft-text {
     font-size: 60px;
     line-height: 40px;
+    margin-bottom: -5px;
   }
 
   .leader-icon {
